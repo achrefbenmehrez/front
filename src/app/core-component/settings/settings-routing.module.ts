@@ -1,0 +1,41 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { SettingsComponent } from './settings.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'generalsettings', pathMatch: 'full' },
+  {
+    path: '',
+    children: [
+     
+      {
+        path: 'group-permissions',
+        loadChildren: () =>
+          import('./grouppermissions/grouppermissions.module').then(
+            (m) => m.GrouppermissionsModule
+          ),
+      },
+      
+      {
+        path: 'create-permission',
+        loadChildren: () =>
+          import('./createpermission/createpermission.module').then(
+            (m) => m.CreatepermissionModule
+          ),
+      },
+      {
+        path: 'edit-permission',
+        loadChildren: () =>
+          import('./editpermission/editpermission.module').then(
+            (m) => m.EditpermissionModule
+          ),
+      },
+    ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class SettingsRoutingModule {}

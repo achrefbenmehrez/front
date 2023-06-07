@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "Name": "Users Mangement",
+      "View": false,
+      "SelectAll": false,
+      "Create": false,
+      "Edit": false,
+      "Delete": false,
+      "details": [
+        "View",
+        "Create",
+        "Edit",
+        "Delete",
+        "Select All"
+      ]
+    },
+    {
+      "Name": "User Permission",
+      "View": false,
+      "SelectAll": false,
+      "Create": false,
+      "Edit": false,
+      "Delete": false,
+      "details": ["View", "Create", "Edit", "Delete", "Select All"]
+    },
+    {
+      "Name": "Products",
+      "View": false,
+      "SelectAll": false,
+      "Create": false,
+      "Edit": false,
+      "Delete": false,
+      "details": [
+        "View",
+        "Create",
+        "Edit",
+        "Delete",
+        "Select All"
+      ]
+    }
+      ],
+  "totalData": 17
+}

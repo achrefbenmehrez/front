@@ -1,0 +1,67 @@
+<!-- Sidebar -->
+<div
+  class="sidebar"
+  id="sidebar"
+  (mouseover)="miniSideBarMouseHover('over')"
+  (mouseout)="miniSideBarMouseHover('out')"
+>
+  <div class="sidebar-inner slimscroll">
+    <perfect-scrollbar>
+      <div id="sidebar-menu" class="sidebar-menu">
+        <ul>
+          <ng-container *ngFor="let mainMenus of sidebarData">
+            <ng-container *ngFor="let menu of mainMenus.subRoutes">
+              <li
+                *ngIf="
+                  menu.hasSubRoute == false &&
+                  (mainMenus.tittle == 'Main Menu' ||
+                    mainMenus.tittle == 'Components')
+                "
+                [class.active]="menu.activeRoute == activePath"
+              >
+                <a [routerLink]="menu.route"
+                  ><img [src]="menu.icon" alt="icon" /><span>
+                    {{ menu.tittle }}
+                  </span>
+                </a>
+              </li>
+              <ng-container *ngIf="menu.hasSubRoute == true">
+                <li class="submenu">
+                  <a
+                    [ngClass]="{
+                      active: activePath === menu.activeRoute,
+                      subdrop: menu.showSubRoute == true
+                    }"
+                    (click)="showSubMenus(menu)"
+                    ><img [src]="menu.icon" alt="img" /><span>
+                      {{ menu.tittle }}</span
+                    >
+                    <span class="menu-arrow"></span
+                  ></a>
+                  <ul
+                    [ngClass]="
+                      menu.showSubRoute == true
+                        ? 'show-sub-menu'
+                        : 'hide-sub-menu'
+                    "
+                  >
+                    <ng-container *ngFor="let subDropMenus of menu.subRoutes">
+                      <li>
+                        <a
+                          [routerLink]="subDropMenus.route"
+                          routerLinkActive="active"
+                          >{{ subDropMenus.tittle }}</a
+                        >
+                      </li>
+                    </ng-container>
+                  </ul>
+                </li>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ul>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>
+<!-- /Sidebar -->

@@ -1,0 +1,139 @@
+<div class="page-header">
+  <div class="page-title">
+    <h4>Create Sales Return</h4>
+    <h6>Add/Update Sales Return</h6>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Article</label>
+          <div class="row">
+            <div class="col-lg-10 col-sm-10 col-10">
+              <select class="form-select">
+                <option>article1</option>
+                <option>article2</option>
+              </select>
+            </div>           
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Motif de Retour</label>
+          <div class="row">
+            <div class="col-lg-10 col-sm-10 col-10">
+              <select class="form-select">
+                <option>sans vignette</option>
+                <option>sans pipette</option>
+                <option>Périmé</option>
+                <option>Livraision Manquante</option>
+                <option>Emballage Abimé</option>
+                <option>Date Proche inferieur a 3 mois</option>
+                <option>Autre</option>
+
+              </select>
+            </div>           
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>N² Lot</label>
+          <div class="row">
+            <div class="col-lg-10 col-sm-10 col-10">
+              <select class="form-select">
+                <option></option>
+                <option></option>
+              </select>
+            </div>           
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>N² BL</label>
+          <div class="row">
+            <div class="col-lg-10 col-sm-10 col-10">
+              <select class="form-select">
+                <option></option>
+              </select>
+            </div>           
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Date Péremption</label>
+          <div class="input-groupicon">
+            <ngx-datepicker [(ngModel)]="date"></ngx-datepicker>
+            <div class="addonset">
+              <img src="assets/img/icons/calendars.svg" alt="img" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>N² Retour</label>
+          <input type="text" />
+        </div>
+      </div>
+      <div class="col-lg-12 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Quantité</label>
+          <div class="input-groupicon">
+            <input
+              type="text"
+              placeholder="1"
+            />
+            <div class="addonset">
+              <img src="assets/img/icons/scanners.svg" alt="img" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+				<div class="form-group">
+					<label>Description</label>
+					<textarea class="form-control" ></textarea>
+				</div>
+			</div>
+    </div>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code PCT</th>
+              <th>Article</th>
+              <th>Stock</th>
+              <th>Motif</th>
+              <th>Quantité à retourner</th>
+              <th>Quantité Validée</th>
+              <th>N² Lot</th>
+              <th>N² BL</th>
+              <th>N² Fact </th>
+              <th>Date Péremption</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let return of tableData; let i = index">
+          <tr *ngIf="tableData.length === 0">
+            <td colspan="12">
+              <h5 class="no-record">Aucun Retour Trouvé</h5>
+            </td>
+          </tr>
+        </table>
+        <div class="col-lg-12" style="margin-top: 45px
+        ">
+          <button type="submit" class="btn btn-submit me-2" >Submit</button>
+          <a [routerLink]="routes.productList" class="btn btn-cancel">Cancel</a>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+</div>

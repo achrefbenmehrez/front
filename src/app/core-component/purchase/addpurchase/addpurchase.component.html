@@ -1,0 +1,260 @@
+<div class="page-header">
+  <div class="page-title">
+    <h4>Product List</h4>
+    <h6>Manage your products</h6>
+  </div>
+ 
+</div>
+
+<!-- /product list -->
+<div class="card">
+  <div class="card-body">
+    <div class="table-top">
+      <div class="search-set">
+        <div class="search-path">
+          <a
+            class="btn btn-filter"
+            (click)="showFilter = !showFilter"
+            [class.setclose]="showFilter == true"
+            id="filter_search"
+          >
+            <img
+              *ngIf="showFilter == false"
+              src="assets/img/icons/filter.svg"
+              alt="img"
+            />
+            <span
+              ><img
+                *ngIf="showFilter == true"
+                    src="assets/img/icons/filter.svg"
+                alt="img"
+            /></span>
+          </a>
+        </div>
+        <div class="search-input">
+          <a class="btn btn-searchset"
+            ><img src="assets/img/icons/search-white.svg" alt="img"
+          /></a>
+          <div class="dataTables_filter">
+            <label>
+              <input
+                [(ngModel)]="searchDataValue"
+                (ngModelChange)="searchData(searchDataValue)"
+                type="search"
+                class="form-control"
+                placeholder="Search..."
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="wordset">
+        <ul>
+          <li>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"
+              ><img src="assets/img/icons/pdf.svg" alt="img"
+            /></a>
+          </li>
+          <li>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"
+              ><img src="assets/img/icons/excel.svg" alt="img"
+            /></a>
+          </li>
+          <li>
+            <a
+              data-bs-toggle="tooltip"
+              target="_blank"
+              data-bs-placement="top"
+              title="print"
+              ><img src="assets/img/icons/printer.svg" alt="img"
+            /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /Filter -->
+    <div
+      class="card mb-0 border-0"
+      [ngClass]="{
+        'show-sub-menu': showFilter == true,
+        'hide-sub-menu': showFilter == false
+      }"
+    >
+      <div class="card-body p-0">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <div class="row">
+              <div class="col-lg col-sm-6 col-12">
+                <div class="form-group">
+                  <select class="form-select">
+                    <option>Choose Product</option>
+                    <option>product1</option>
+                    <option>product 2</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg col-sm-6 col-12">
+                <div class="form-group">
+                  <select class="form-select">
+                    <option>Choose Category</option>
+                    <option>cat 1</option>
+                    <option>cat 2</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg col-sm-6 col-12">
+                <div class="form-group">
+                  <select class="form-select">
+                    <option>Choose</option>
+                    <option>cat 1</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg col-sm-6 col-12">
+                <div class="form-group">
+                  <select class="form-select">
+                    <option>Brand</option>
+                    <option>N/D</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg col-sm-6 col-12">
+                <div class="form-group">
+                  <select class="form-select">
+                    <option>Price</option>
+                    <option>150.00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-1 col-sm-6 col-12">
+                <div class="form-group">
+                  <a class="btn btn-filters ms-auto"
+                    ><img src="assets/img/icons/search-whites.svg" alt="img"
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Filter -->
+    <div class="table-responsive">
+      <table
+        (matSortChange)="sortData($event)"
+        matSort
+        matSortActive="Sno"
+        matSortDirection="asc"
+        matSortDisableClear
+        class="table table-fit"
+        id="printTable"
+      >
+        <thead>
+          <tr>
+            <th mat-sort-header ="image">Image</th>
+            <th mat-sort-header="codePCT" >Code PCT</th>
+            <th mat-sort-header="designation" >Désignation</th>
+            <th mat-sort-header="uniteParCaisse">Unités par caisse</th>
+            <th mat-sort-header="prix">Prix</th>
+            <th mat-sort-header="remise">Remise</th>
+            <th mat-sort-header="carton">Carton</th>
+            <th mat-sort-header="vrac">   VRAC   </th>
+            <th mat-sort-header="quantiteTotale">Quantité totale</th>
+            <th mat-sort-header="montantApresRemise">Mantant aprés remise</th>
+            <th mat-sort-header="disponible">Disponibilité</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let purchase of tableData; let i = index">
+            <td class="productimgname">
+              <a class="product-img">
+                <img [src]="purchase.img" alt="product" />
+              </a>
+              <a href="javascript:void(0);">{{ purchase.ProductName }}</a>
+            </td>
+            <td>{{ purchase.codePCT }}</td>
+            <td>{{ purchase.designation }}</td>
+            <td>{{ purchase.uniteParCaisse }}</td>
+            <td>{{ purchase.prix }}</td>
+            <td>% {{ purchase.remise }}</td>
+            <td>
+                <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'carton', 1)"></button>
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="purchase.carton"
+                  (ngModelChange)="cartonCalculate($event, purchase)"
+                />
+                <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'carton', -1)"></button>
+            </td>
+            <td>
+                <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', 1)"></button>
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="purchase.vrac"
+                  (ngModelChange)="vracCalculate($event, purchase)"
+                />
+                <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', -1)"></button>
+            </td>
+            
+            
+            <td>
+              <input type="text" [(ngModel)]="purchase.quantiteTotale" id="quantiteTotale{{i}}" disabled />
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="purchase.montantApresRemise" id="montantApresRemise{{i}}" disabled />
+            </td>
+            <td>
+              <button
+                type="button"
+                [ngClass]="{
+                  'btn-success': purchase.disponible,
+                  'btn-danger': !purchase.disponible
+                }"
+                class="me-1 btn btn-rounded"
+              >
+                {{ purchase.disponible ? 'En Stock' : 'En Rupture' }}
+              </button>
+            </td>
+            <td>
+             
+            </td>
+          </tr>
+          <tr *ngIf="tableData.length === 0">
+            <td colspan="12">
+              <h5 class="no-record">No matching records found</h5>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <custom-pagination></custom-pagination>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 float-md-right">
+        <div class="total-order">
+          <ul>
+            <li>
+              <h4>Remise</h4>
+              <h5>% 0.00</h5>
+            </li>
+            <li class="total">
+              <h4>Total</h4>
+              <h5>Tnd {{ calculateTotalAmount() | number:'1.2-2' }}</h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="col-lg-12">
+        <a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
+        <a [routerLink]="routes.purchaseList" class="btn btn-cancel"
+          >Cancel</a
+        >
+      </div>
+  </div>
+</div>
+<!-- /product list -->
+
+
