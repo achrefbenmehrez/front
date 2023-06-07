@@ -109,7 +109,7 @@
         <div class="form-group">
           <label> Product Image</label>
           <div class="image-upload">
-            <input type="file" [(ngModel)]="img">
+            <input type="file" (change)="onFileSelected($event)">
             <div class="image-uploads">
               <img src="assets/img/icons/upload.svg" alt="img">
               <h4>Drag and drop a file to upload</h4>

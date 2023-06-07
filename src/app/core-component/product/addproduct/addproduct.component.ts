@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { routes } from 'src/app/core/helpers/routes';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addproduct',
@@ -22,10 +23,14 @@ export class AddproductComponent implements OnInit {
   disponible = '';
   productName = '';
   description = '';
-  img: File = new File([], '');
+  selectedFile: File | null = null;
   public routes = routes;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
 
   ngOnInit(): void {
   }
@@ -44,14 +49,17 @@ export class AddproductComponent implements OnInit {
     formData.append('quantiteTotale', this.quantiteTotale.toString());
     formData.append('montantApresRemise', this.montantApresRemise.toString());
     formData.append('disponible', this.disponible.toString());
-    formData.append('img', this.img);
-
+    if (this.selectedFile)
+      formData.append('img', this.selectedFile);
+    else
+      console.log('No file selected')
     const headers = new HttpHeaders();
     headers.append('Accept', 'application/json');
 
     this.http.post('http://localhost:8089/api/products/add', formData, { headers: headers }).subscribe(
       (data) => {
         console.log('Product added successfully:', data);
+        this.router.navigate(['/product/product-list']);
       },
       (error) => {
         console.error('Failed to add product:', error);

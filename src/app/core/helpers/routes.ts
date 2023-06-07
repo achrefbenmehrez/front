@@ -153,8 +153,8 @@ export class routes {
   public static get barcode(): string {
     return this.product + '/barcode';
   }
-  public static get editProduct(): string {
-    return this.product + '/edit-product';
+  public static editProduct(id: string): string {
+    return this.product + '/edit-product/' + id;
   }
   public static get editCategory(): string {
     return this.product + '/edit-category';
@@ -165,8 +165,8 @@ export class routes {
   public static get editBrand(): string {
     return this.product + '/edit-brand';
   }
-  public static get productDetails(): string {
-    return this.product + '/product-details';
+  public static productDetails(id: string): string {
+    return this.product + '/product-details/' + id;
   }
   public static get brandList(): string {
     return this.product + '/brand-list';
@@ -195,6 +195,16 @@ export class routes {
   }
   public static get salesDetails(): string {
     return this.sales + '/sales-details';
+  }
+
+  public static get mesReclamations(): string {
+    return this.baseUrl + '/mes-reclamations';
+  }
+  public static get createReclamation(): string {
+    return this.baseUrl + '/create-reclamation';
+  }
+  public static get contact(): string {
+    return this.baseUrl + '/contact';
   }
 
   public static get purchaseList(): string {
