@@ -22,7 +22,6 @@ export class AddproductComponent implements OnInit {
   montantApresRemise = '';
   disponible = '';
   productName = '';
-  description = '';
   selectedFile: File | null = null;
   public routes = routes;
 

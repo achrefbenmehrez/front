@@ -45,7 +45,11 @@ const routes: Routes = [
           import('./people/people.module').then((m) => m.PeopleModule),
       },
      
-     
+     {
+        path: 'commandes',
+        loadChildren: () =>
+          import('./commande/commande.module').then((m) => m.CommandeModule),
+     },
    
       
       {

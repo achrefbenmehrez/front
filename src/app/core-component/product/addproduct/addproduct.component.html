@@ -64,12 +64,6 @@
           <input type="text" [(ngModel)]="quantiteTotale">
         </div>
       </div>
-      <div class="col-lg-12">
-        <div class="form-group">
-          <label>Description</label>
-          <textarea class="form-control" [(ngModel)]="description"></textarea>
-        </div>
-      </div>
       <div class="col-lg-3 col-sm-6 col-12">
         <div class="form-group">
           <label>Remise Vrac</label>
@@ -82,11 +76,7 @@
       <div class="col-lg-3 col-sm-6 col-12">
         <div class="form-group">
           <label>Discount Type</label>
-          <select class="form-select" [(ngModel)]="remise">
-            <option>Percentage</option>
-            <option>10</option>
-            <option>20</option>
-          </select>
+          <input type="text" class="form-select" [(ngModel)]="remise">
         </div>
       </div>
       <div class="col-lg-3 col-sm-6 col-12">

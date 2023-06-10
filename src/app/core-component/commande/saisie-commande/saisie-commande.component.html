@@ -1,0 +1,69 @@
+<div class="table-responsive">
+  <table (matSortChange)="sortData($event)" matSort matSortActive="Sno" matSortDirection="asc" matSortDisableClear
+    class="table" id="printTable">
+    <thead>
+      <tr>
+        <th>
+          <label class="checkboxs" (click)="selectAll(initChecked)">
+            <input type="checkbox" [(ngModel)]="initChecked" />
+            <span class="checkmarks"></span>
+          </label>
+        </th>
+        <th mat-sort-header="image">image</th>
+        <th mat-sort-header="id">id</th>
+        <th mat-sort-header="codePCT">codePCT</th>
+        <th mat-sort-header="prix">price</th>
+        <th mat-sort-header="remise">remise</th>
+        <th mat-sort-header="Unit">unite Par Caisse</th>
+        <th mat-sort-header="carton">carton</th>
+        <th mat-sort-header="vrac">vrac</th>
+        <th mat-sort-header="quantiteTotale">quantiteTotale</th>
+        <th mat-sort-header="montantApresRemise">montantApresRemise</th>
+        <th mat-sort-header="disponible">disponible</th>
+        <th mat-sort-header="productName">Nom</th>
+        <th>Action</th>
+        <th>Quantity</th> <!-- Add this column -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let products of tableData; let i = index">
+        <td>
+          <label class="checkboxs">
+            <input type="checkbox" [(ngModel)]="products.isSelected" />
+            <span class="checkmarks"></span>
+          </label>
+        </td>
+        <td class="productimgname">
+          <a href="javascript:void(0);" class="product-img">
+            <img [src]="products.imgLink" alt="product" />
+          </a>
+          <a href="javascript:void(0);">{{ products.name }}</a>
+        </td>
+        <td>{{ products.id }}</td>
+        <td>{{ products.codePCT }}</td>
+        <td>{{ products.prix }}</td>
+        <td>{{ products.remise }}</td>
+        <td>{{ products.uniteParCaisse }}</td>
+        <td>{{ products.carton }}</td>
+        <td>{{ products.vrac }}</td>
+        <td>{{ products.quantiteTotale }}</td>
+        <td>{{ products.montantApresRemise }}</td>
+        <td>{{ products.disponible }}</td>
+        <td>{{ products.productName }}</td>
+        <td>{{ products.CreatedBy }}</td>
+        <td>
+          <input type="number" name="" id="" [(ngModel)]="products.quantity" (change)="updatePrixTotal()" />
+        </td> <!-- Add this column -->
+      </tr>
+      <tr *ngIf="tableData.length === 0">
+        <td colspan="12">
+          <h5 class="no-record">No matching records found</h5>
+        </td>
+      </tr>
+    </tbody>
+    <div class="">
+      <h4 class="ml-4">Prix Total: {{prixTotal}}</h4>
+      <input type="button" value="Soumettre" (click)="commander()" />
+    </div>
+  </table>
+</div>
