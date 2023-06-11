@@ -3,6 +3,8 @@ import { NavigationStart, Router } from '@angular/router';
 import { SettingsService, SidebarService } from 'src/app/core/core.index';
 import { WebstorgeService } from 'src/app/shared/webstorge.service';
 import { routes } from 'src/app/core/helpers/routes';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -17,14 +19,13 @@ export class HeaderComponent implements OnInit {
   public darkTheme: boolean = false;
   public logoPath: string = '';
   public miniSidebar: boolean = false;
-  public userName: string = ''
-  public userRole: string = ''
-
+  profileImagePath = '';
   constructor(
     private Router: Router,
     private settings: SettingsService,
     private sidebar: SidebarService,
-    private webStorage: WebstorgeService
+    private webStorage: WebstorgeService,
+    private http: HttpClient
   ) {
     this.activePath = this.Router.url.split('/')[2];
     this.Router.events.subscribe((data: any) => {
@@ -51,16 +52,15 @@ export class HeaderComponent implements OnInit {
         this.logoPath = 'assets/img/logo.png';
       }
     });
-
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      this.userName = decodedToken.sub;
-      this.userRole = decodedToken.roles[0].split('_')[1];
-    }
   }
-
-  ngOnInit(): void { }
+  userrr: any;
+  user: any;
+  ngOnInit(): void {
+    this.getUserByToken().subscribe((user: any) => {
+      this.userrr = user;
+      console.log(this.userrr);
+    });
+  }
 
   public logout(): void {
     this.webStorage.Logout();
@@ -80,5 +80,8 @@ export class HeaderComponent implements OnInit {
     } else {
       this.sidebar.expandSideBar.next(false);
     }
+  }
+  getUserByToken(): Observable<any> {
+    return this.http.get<any>('http://localhost:8089/api/users/profile');
   }
 }

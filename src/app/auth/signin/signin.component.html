@@ -12,20 +12,19 @@
           <h3>Sign In</h3>
           <h4>Please login to your account</h4>
         </div>
-        <form [formGroup]="form" >
+        <form [formGroup]="form">
           <div class="form-login">
-            <label>Email</label>
+            <label>Username</label>
             <div class="form-addons">
               <input
                 type="text"
-                placeholder="Enter your email address"
+                placeholder="Enter your username"
                 formControlName="email"
                 id="email"
                 [ngClass]="{
                   'is-invalid': f['email'].touched && f['email'].invalid
                 }"
                 [(ngModel)]="email"
-
               />
               <img src="assets/img/icons/mail.svg" alt="img" />
             </div>
@@ -58,7 +57,6 @@
                 id="password"
                 [ngClass]="{
                   'is-invalid': f['password'].touched && f['password'].invalid
-                  
                 }"
                 [(ngModel)]="password"
               />

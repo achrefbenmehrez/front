@@ -115,25 +115,7 @@ export class routes {
     return this.product + '/product-list';
   }
   public static get commande(): string {
-    return this.baseUrl + '/commandes';
-  }
-  public static get listeCommandes(): string {
-    return this.commande + '/liste-commandes';
-  }
-  public static get importCommande(): string {
-    return this.commande + '/import-commande';
-  }
-  public static get mesCommandes(): string {
-    return this.commande + '/mes-commandes';
-  }
-  public static get commandesNonTraites(): string {
-    return this.commande + '/commandes-non-traitees';
-  }
-  public static get saisieCommande(): string {
-    return this.commande + '/saisie-commande';
-  }
-  public static get mesLivraisons(): string {
-    return this.product + '/mes-livraisons';
+    return this.product + '/commande';
   }
   public static get addProduct(): string {
     return this.product + '/add-product';
@@ -159,8 +141,8 @@ export class routes {
   public static get barcode(): string {
     return this.product + '/barcode';
   }
-  public static editProduct(id: string): string {
-    return this.product + '/edit-product/' + id;
+  public static get editProduct(): string {
+    return this.product + '/edit-product';
   }
   public static get editCategory(): string {
     return this.product + '/edit-category';
@@ -171,8 +153,8 @@ export class routes {
   public static get editBrand(): string {
     return this.product + '/edit-brand';
   }
-  public static productDetails(id: string): string {
-    return this.product + '/product-details/' + id;
+  public static get productDetails(): string {
+    return this.product + '/product-details';
   }
   public static get brandList(): string {
     return this.product + '/brand-list';
@@ -201,31 +183,6 @@ export class routes {
   }
   public static get salesDetails(): string {
     return this.sales + '/sales-details';
-  }
-
-  public static get reclamations(): string {
-    return this.baseUrl + '/reclamations';
-  }
-  public static get listeReclamations(): string {
-    return this.reclamations + '/liste-reclamations';
-  }
-  public static get mesReclamations(): string {
-    return this.reclamations + '/mes-reclamations';
-  }
-  public static get createReclamation(): string {
-    return this.reclamations + '/create-reclamation';
-  }
-  public static get contact(): string {
-    return this.baseUrl + '/contact';
-  }
-  public static get messages(): string {
-    return this.contact + '/messages';
-  }
-  public static get emailsToClients(): string {
-    return this.contact + '/emails-to-clients';
-  }
-  public static get annoncesGrossistes(): string {
-    return this.contact + '/annonces-grossistes';
   }
 
   public static get purchaseList(): string {

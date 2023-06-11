@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { EdituserRoutingModule } from './edituser-routing.module';
 import { EdituserComponent } from './edituser.component';
+import { FormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -11,7 +13,8 @@ import { EdituserComponent } from './edituser.component';
   ],
   imports: [
     CommonModule,
-    EdituserRoutingModule
+    EdituserRoutingModule,
+    FormsModule,NgxDropzoneModule
   ]
 })
 export class EdituserModule { }

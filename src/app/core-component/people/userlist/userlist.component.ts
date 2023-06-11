@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 import { apiResultFormat, DataService, pageSelection, routes } from 'src/app/core/core.index';
 import { PaginationService, tablePageSize } from 'src/app/shared/shared.index';
 import { SweetalertService } from 'src/app/shared/sweetalert/sweetalert.service';
@@ -29,7 +31,9 @@ export class UserlistComponent implements OnInit {
     private data: DataService,
     private pagination: PaginationService,
     private sweetalert: SweetalertService,
-    private router: Router
+    private router: Router,
+    private jwtHelper: JwtHelperService,
+    
   ) {
     this.pagination.tablePageSize.subscribe((res: tablePageSize) => {
       if (this.router.url == this.routes.userList) {
@@ -70,7 +74,7 @@ export class UserlistComponent implements OnInit {
       }
     );
   }
-
+ 
   public searchData(value: any): void {
     this.dataSource.filter = value.trim().toLowerCase();
     this.tableData = this.dataSource.filteredData;

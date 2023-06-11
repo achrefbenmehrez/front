@@ -40,7 +40,6 @@ export class SidebarOneComponent implements OnInit {
     });
 
     this.sidebar.getSideBarData.subscribe((res: any) => {
-      console.log(res)
       res.forEach((mainMenus: any) => {
         if (
           mainMenus.tittle == 'Users' ||

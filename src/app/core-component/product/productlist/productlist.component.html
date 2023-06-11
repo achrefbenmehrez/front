@@ -4,9 +4,10 @@
     <h6>Manage your products</h6>
   </div>
   <div class="page-btn">
-    <a [routerLink]="routes.addProduct" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-        class="me-1" />Add New
-      Product</a>
+    <a [routerLink]="routes.addProduct" class="btn btn-added"
+      ><img src="assets/img/icons/plus.svg" alt="img" class="me-1" />Add New
+      Product</a
+    >
   </div>
 </div>
 
@@ -16,18 +17,38 @@
     <div class="table-top">
       <div class="search-set">
         <div class="search-path">
-          <a class="btn btn-filter" (click)="showFilter = !showFilter" [class.setclose]="showFilter == true"
-            id="filter_search">
-            <img *ngIf="showFilter == false" src="assets/img/icons/filter.svg" alt="img" />
-            <span><img *ngIf="showFilter == true" src="assets/img/icons/filter.svg" alt="img" /></span>
+          <a
+            class="btn btn-filter"
+            (click)="showFilter = !showFilter"
+            [class.setclose]="showFilter == true"
+            id="filter_search"
+          >
+            <img
+              *ngIf="showFilter == false"
+              src="assets/img/icons/filter.svg"
+              alt="img"
+            />
+            <span
+              ><img
+                *ngIf="showFilter == true"
+                    src="assets/img/icons/filter.svg"
+                alt="img"
+            /></span>
           </a>
         </div>
         <div class="search-input">
-          <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img" /></a>
+          <a class="btn btn-searchset"
+            ><img src="assets/img/icons/search-white.svg" alt="img"
+          /></a>
           <div class="dataTables_filter">
             <label>
-              <input [(ngModel)]="searchDataValue" (ngModelChange)="searchData(searchDataValue)" type="search"
-                class="form-control" placeholder="Search..." />
+              <input
+                [(ngModel)]="searchDataValue"
+                (ngModelChange)="searchData(searchDataValue)"
+                type="search"
+                class="form-control"
+                placeholder="Search..."
+              />
             </label>
           </div>
         </div>
@@ -35,25 +56,35 @@
       <div class="wordset">
         <ul>
           <li>
-            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg"
-                alt="img" /></a>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"
+              ><img src="assets/img/icons/pdf.svg" alt="img"
+            /></a>
           </li>
           <li>
-            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="assets/img/icons/excel.svg"
-                alt="img" /></a>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"
+              ><img src="assets/img/icons/excel.svg" alt="img"
+            /></a>
           </li>
           <li>
-            <a data-bs-toggle="tooltip" target="_blank" data-bs-placement="top" title="print"><img
-                src="assets/img/icons/printer.svg" alt="img" /></a>
+            <a
+              data-bs-toggle="tooltip"
+              target="_blank"
+              data-bs-placement="top"
+              title="print"
+              ><img src="assets/img/icons/printer.svg" alt="img"
+            /></a>
           </li>
         </ul>
       </div>
     </div>
     <!-- /Filter -->
-    <div class="card mb-0 border-0" [ngClass]="{
+    <div
+      class="card mb-0 border-0"
+      [ngClass]="{
         'show-sub-menu': showFilter == true,
         'hide-sub-menu': showFilter == false
-      }">
+      }"
+    >
       <div class="card-body p-0">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
@@ -102,7 +133,9 @@
               </div>
               <div class="col-lg-1 col-sm-6 col-12">
                 <div class="form-group">
-                  <a class="btn btn-filters ms-auto"><img src="assets/img/icons/search-whites.svg" alt="img" /></a>
+                  <a class="btn btn-filters ms-auto"
+                    ><img src="assets/img/icons/search-whites.svg" alt="img"
+                  /></a>
                 </div>
               </div>
             </div>
@@ -112,8 +145,15 @@
     </div>
     <!-- /Filter -->
     <div class="table-responsive">
-      <table (matSortChange)="sortData($event)" matSort matSortActive="Sno" matSortDirection="asc" matSortDisableClear
-        class="table" id="printTable">
+      <table
+        (matSortChange)="sortData($event)"
+        matSort
+        matSortActive="Sno"
+        matSortDirection="asc"
+        matSortDisableClear
+        class="table"
+        id="printTable"
+      >
         <thead>
           <tr>
             <th>
@@ -128,7 +168,7 @@
             <th mat-sort-header="prix">price</th>
             <th mat-sort-header="remise">remise</th>
             <th mat-sort-header="Unit">unite Par Caisse</th>
-            <th mat-sort-header="carton">carton</th>
+            <th mat-sort-header="carton">carton</th> 
             <th mat-sort-header="vrac">vrac</th>
             <th mat-sort-header="quantiteTotale">quantiteTotale</th>
             <th mat-sort-header="montantApresRemise">montantApresRemise</th>
@@ -147,7 +187,7 @@
             </td>
             <td class="productimgname">
               <a href="javascript:void(0);" class="product-img">
-                <img [src]="products.imgLink" alt="product" />
+                <img [src]="products.img" alt="product" />
               </a>
               <a href="javascript:void(0);">{{ products.name }}</a>
             </td>
@@ -164,14 +204,18 @@
             <td>{{ products.productName }}</td>
             <td>{{ products.CreatedBy }}</td>
             <td>
-              <a class="me-3" [routerLink]="routes.productDetails(products.id)">
+              <a class="me-3" [routerLink]="routes.productDetails">
                 <img src="assets/img/icons/eye.svg" alt="img" />
               </a>
-              <a class="me-3" [routerLink]="routes.editProduct(products.id)">
+              <a class="me-3" [routerLink]="routes.editProduct">
                 <img src="assets/img/icons/edit.svg" alt="img" />
               </a>
 
-              <a (click)="deleteBtn(products.id)" class="confirm-text" href="javascript:void(0);">
+              <a
+                (click)="deleteBtn(products.id)"
+                class="confirm-text"
+                href="javascript:void(0);"
+              >
                 <img src="assets/img/icons/delete.svg" alt="img" />
               </a>
             </td>

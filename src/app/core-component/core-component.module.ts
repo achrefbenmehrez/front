@@ -12,7 +12,9 @@ import { SidebarFiveComponent } from '../common-component/sidebar-five/sidebar-f
 import { HeaderComponent } from '../common-component/header/header.component';
 import { LayoutComponent } from '../common-component/layout/layout.component';
 import { sharedModule } from '../shared/shared.module';
-
+import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../auth.interceptor';
 @NgModule({
   declarations: [
     CoreComponentComponent,
@@ -24,7 +26,30 @@ import { sharedModule } from '../shared/shared.module';
     SidebarFiveComponent,
     LayoutComponent,
   ],
-  imports: [CommonModule, CoreComponentRoutingModule, sharedModule],
-  providers: [],
+  imports: [
+    CommonModule,
+    CoreComponentRoutingModule,
+    sharedModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: () => ({
+          allowedDomains: ['*'],
+          tokenGetter: () => localStorage.getItem('token'),
+          headerName: 'Authorization',
+          authScheme: 'Bearer ',
+          throwNoTokenError: true,
+        }),
+      },
+    }),
+  ],
+  providers: [
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class CoreComponentModule {}

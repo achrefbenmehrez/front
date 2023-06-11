@@ -1,96 +1,186 @@
+<div class="page-header">
+  <div class="page-title">
+    <h4>User Management</h4>
+    <h6>Edit/Update User</h6>
+  </div>
+</div>
+<!-- /add -->
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            value="{{ this.user.firstname }}"
+            [(ngModel)]="this.user.firstname"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Last Name</label>
+          <input
+            type="text"
+            value="{{ this.user.lastname }}"
+            [(ngModel)]="this.user.lastname"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>User Name</label>
+          <input
+            type="text"
+            value="{{ this.user.email }}"
+            [(ngModel)]="this.user.email"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pass-group">
+            <input [type]="password" class="pass-input" placeholder="" />
+            <span
+              class="fas toggle-password fa-eye"
+              (click)="onClick()"
+              *ngIf="show"
+            ></span>
+            <span
+              class="fas toggle-password fa-eye-slash"
+              (click)="onClick()"
+              *ngIf="!show"
+            ></span>
+          </div>
+        </div>
+      </div>
 
-        <div class="page-header">
-            <div class="page-title">
-                <h4>User Management</h4>
-                <h6>Edit/Update User</h6>
-            </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Email 1</label>
+          <input
+            type="text"
+            value="{{ this.user.emailadd[0] }}"
+            [(ngModel)]="this.user.emailadd[0]"
+          />
         </div>
-        <!-- /add -->
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" value="Thomas">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" value="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>User Name</label>
-                            <input type="text" value="Thomas12">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <div class="pass-group">
-                                <input [type]="password" class=" pass-input" placeholder="12345">
-                                <span class="fas toggle-password fa-eye" (click)="onClick()" *ngIf="show"></span>
-                                <span class="fas toggle-password fa-eye-slash" (click)="onClick()" *ngIf="!show"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="text" value="+123456789">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" value="thomas@mail.com">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Role</label>
-                            <select class="form-select">
-                                <option>Owner</option>
-                                <option>	</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>	User Image</label>
-                            <div class="image-upload">
-                                <input type="file">
-                                <div class="image-uploads">
-                                    <img src="assets/img/icons/upload.svg" alt="img">
-                                    <h4>Drag and drop a file to upload</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="product-list">
-                            <ul class="row">
-                                <li class="ps-0">
-                                    <div class="productviewset">
-                                        <div class="productviewsimg">
-                                            <img src="assets/img/customer/profile2.jpg" alt="img">
-                                        </div>
-                                        <div class="productviewscontent">
-                                            <a href="javascript:void(0);" class="hideset"><i class="fa fa-trash-alt"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <a class="btn btn-submit me-2">Update</a>
-                        <a class="btn btn-cancel">Cancel</a>
-                    </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Email 2</label>
+          <input
+            type="text"
+            value="{{ this.user.emailadd[1] }}"
+            [(ngModel)]="this.user.emailadd[1]"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Email 3</label>
+          <input
+            type="text"
+            value="{{ this.user.emailadd[2] }}"
+            [(ngModel)]="this.user.emailadd[2]"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Remise</label>
+          <input
+            type="number"
+            step="0.01"
+            min="0.00"
+            value="{{ this.user.remise }}"
+            [(ngModel)]="this.user.remise"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+          <label>Role</label>
+          <select
+            class="form-select"
+            [(ngModel)]="this.user.role"
+            value="{{ this.user.role }}"
+          >
+            <option>USER</option>
+            <option>ADMIN</option>
+            <option>COMMERCIAL</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> User Image</label>
+          <ngx-dropzone
+            class="custom-dropzone dropzone"
+            name="file"
+            (change)="onSelect($event)"
+            ngx-dropzone
+            [accept]="'image/*'"
+          >
+            <div class="dropzone-msg dz-message needsclick">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <ngx-dropzone-label class="dropzone-msg-title"
+                >Drop Profile image to upload.</ngx-dropzone-label
+              >
+              <ngx-dropzone-label class="dropzone-msg-desc"
+                >Or click to pick manually.</ngx-dropzone-label
+              >
+            </div>
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              [file]="selectedFile"
+              [removable]="true"
+              (removed)="onRemove(selectedFile)"
+            >
+              <ngx-dropzone-label
+                >{{ selectedFile?.name }} ({{
+                  selectedFile?.type
+                }})</ngx-dropzone-label
+              >
+            </ngx-dropzone-image-preview>
+          </ngx-dropzone>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="product-list">
+          <ul class="row">
+            <li class="ps-0">
+              <div class="productviewset">
+                <div class="productviewsimg">
+                  <img
+                    [src]="
+                      this.user.profileImagePath
+                        ? this.user?.profileImagePath
+                        : 'https://ui-avatars.com/api/?background=random&name=' +
+                          this.user.email +
+                          '&rounded=true'
+                    "
+                    alt="img"
+                  />
                 </div>
-            </div>
+                <div class="productviewscontent">
+                  <a href="javascript:void(0);" class="hideset"
+                    ><i class="fa fa-trash-alt"></i
+                  ></a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
-        <!-- /add -->
+      </div>
+      <div class="col-lg-12">
+        <a class="btn btn-submit me-2" (click)="OnSubmit(this.user.id)"
+          >Update</a
+        >
+        <a class="btn btn-cancel">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /add -->

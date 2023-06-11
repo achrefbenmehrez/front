@@ -8,14 +8,21 @@ import { LoaderComponent } from './common-component/loader/loader.component';
 import { sharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
+import { NgxDropzoneModule } from 'ngx-dropzone';
 const icons = {
   Layers,
 };
 
 @NgModule({
   declarations: [AppComponent, LoaderComponent],
-  imports: [BrowserModule, AppRoutingModule, sharedModule, BrowserAnimationsModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    sharedModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    NgxDropzoneModule,
+  ],
   exports: [FeatherModule],
   bootstrap: [AppComponent],
 })

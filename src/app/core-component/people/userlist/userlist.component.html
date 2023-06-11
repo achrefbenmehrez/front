@@ -133,13 +133,14 @@
                 <span class="checkmarks"></span>
               </label>
             </th>
-            <th >Profile</th>
+            <th>Profile</th>
+            <th mat-sort-header="codeclient">Code client</th>
             <th mat-sort-header="firstname">First name</th>
             <th mat-sort-header="lastname">Last name</th>
-            <th mat-sort-header="username">User name</th>
+            <th mat-sort-header="username">Username</th>
             <th mat-sort-header="role">Role</th>
             <th mat-sort-header="email">Email</th>
-            <th mat-sort-header="enabled">Status</th>
+            <th mat-sort-header="enabled">Remise</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -153,16 +154,31 @@
             </td>
             <td class="productimgname">
               <a href="javascript:void(0);" class="product-img">
-                <img [src]="people.profileImage" alt="profile" />
+                <img
+                  [src]="
+                    people.profileImagePath
+                      ? this.people?.profileImagePath
+                      : 'https://ui-avatars.com/api/?background=random&name=' +
+                        this.people.username +
+                        '&rounded=true'
+                  "
+                  alt="profile"
+                />
               </a>
             </td>
+            <td>{{ people.codeClient }}</td>
             <td>{{ people.firstname }}</td>
             <td>{{ people.lastname }}</td>
             <td>{{ people.username }}</td>
             <td>{{ people.role }}</td>
-            <td>{{ people.email }}</td>
             <td>
-              <div
+              &bull; {{ people.emailadd[0] }}<br />
+              &bull; {{ people.emailadd[1] }}<br />
+              &bull; {{ people.emailadd[2] }}
+            </td>
+            <td>{{ people.remise }}</td>
+
+            <!--   <div
                 class="status-toggle d-flex justify-content-between align-items-center"
               >
                 <input
@@ -175,9 +191,9 @@
                   >checkbox</label
                 >
               </div>
-            </td>
+            </td> -->
             <td>
-              <a class="me-3" [routerLink]="routes.editUser">
+              <a class="me-3" [routerLink]="[routes.editUser, people.id]">
                 <img src="assets/img/icons/edit.svg" alt="img" />
               </a>
               <a
