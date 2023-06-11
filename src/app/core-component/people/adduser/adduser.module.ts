@@ -14,7 +14,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
   imports: [
     CommonModule,
     AdduserRoutingModule,
-    FormsModule,NgxDropzoneModule
+    FormsModule, NgxDropzoneModule
   ]
 })
 export class AdduserModule { }

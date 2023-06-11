@@ -24,7 +24,7 @@ const routes: Routes = [
       },
  
       {
-        path: 'edit-product',
+        path: 'edit-product/:id',
         loadChildren: () =>
           import('./editproduct/editproduct.module').then(
             (m) => m.EditproductModule
@@ -38,7 +38,7 @@ const routes: Routes = [
           ),
           },
       {
-        path: 'product-details',
+        path: 'product-details/:id',
         loadChildren: () =>
           import('./product-details/product-details.module').then(
             (m) => m.ProductDetailsModule

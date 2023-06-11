@@ -44,7 +44,7 @@ export class ProductlistComponent implements OnInit {
 
   deleteBtn(id: number) {
     this.sweetlalert.deleteBtn();
-    this.http.delete(`http://localhost:8089/api/auth/delete/${id}`).subscribe(
+    this.http.delete(`http://localhost:8089/api/products/delete/${id}`).subscribe(
       (data) => {
         // Handle success
         console.log('Product deleted successfully:', data);
@@ -65,7 +65,7 @@ export class ProductlistComponent implements OnInit {
   }
 
   private getTableData(pageOption: pageSelection = { skip: 0, limit: 10 }): void {
-    this.http.get('http://localhost:8089/api/auth/products/all').subscribe(
+    this.http.get('http://localhost:8089/api/products/all').subscribe(
       (data: any) => {
         // Update the tableData property with the retrieved data
         this.tableData = data;

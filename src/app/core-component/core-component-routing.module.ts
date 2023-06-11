@@ -15,7 +15,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
-    
+
       {
         path: 'product',
         loadChildren: () =>
@@ -31,9 +31,9 @@ const routes: Routes = [
         loadChildren: () =>
           import('./purchase/purchase.module').then((m) => m.PurchaseModule),
       },
-      
-    
-   
+
+
+
       {
         path: 'return',
         loadChildren: () =>
@@ -44,16 +44,20 @@ const routes: Routes = [
         loadChildren: () =>
           import('./people/people.module').then((m) => m.PeopleModule),
       },
-     
-     
-   
-      
+
+
+      {
+        path: 'commandes',
+        loadChildren: () =>
+          import('./commande/commande.module').then((m) => m.CommandeModule),
+      },
+
       {
         path: 'report',
         loadChildren: () =>
           import('./report/report.module').then((m) => m.ReportModule),
       },
-     
+
       {
         path: 'settings',
         loadChildren: () =>
@@ -79,4 +83,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CoreComponentRoutingModule {}
+export class CoreComponentRoutingModule { }

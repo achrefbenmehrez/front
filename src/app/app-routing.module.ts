@@ -18,6 +18,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./core-component/errorpages/errorpages.module').then((m) => m.ErrorpagesModule),
   },
+  { path: 'core-component/commandes', loadChildren: () => import('./core-component/commande/commande.module').then(m => m.CommandeModule) },
+  { path: 'core-component/reclamation', loadChildren: () => import('./core-component/reclamation/reclamation.module').then(m => m.ReclamationModule) },
   {
     path: '**',
     redirectTo: 'errorpages/error404',

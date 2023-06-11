@@ -58,7 +58,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getUserByToken().subscribe((user: any) => {
       this.userrr = user;
-      console.log(this.userrr);
     });
   }
 
