@@ -191,7 +191,7 @@ export class SaisieCommandeComponent {
         .map((product: any) => {
           return {
             productId: product.productId,
-            quantity: product.quantity
+            quantity: parseInt(product.quantity)
           };
         })
       ).subscribe(

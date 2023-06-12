@@ -209,8 +209,11 @@ export class routes {
   public static get reclamations(): string {
     return this.baseUrl + '/reclamations';
   }
-  public static get listeReclamations(): string {
-    return this.reclamations + '/liste-reclamations';
+  public static get listeReclamationsTraites(): string {
+    return this.reclamations + '/reclamations-traités';
+  }
+  public static get listeReclamationsNonTraites(): string {
+    return this.reclamations + '/reclamations-non-traités';
   }
   public static get mesReclamations(): string {
     return this.reclamations + '/mes-reclamations';

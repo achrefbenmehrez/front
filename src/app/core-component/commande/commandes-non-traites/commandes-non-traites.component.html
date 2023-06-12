@@ -117,19 +117,11 @@
                 <span class="checkmarks"></span>
               </label>
             </th>
-            <th mat-sort-header="image">image</th>
-            <th mat-sort-header="id">id</th>
-            <th mat-sort-header="codePCT">codePCT</th>
-            <th mat-sort-header="prix">price</th>
-            <th mat-sort-header="remise">remise</th>
-            <th mat-sort-header="Unit">unite Par Caisse</th>
-            <th mat-sort-header="carton">carton</th>
-            <th mat-sort-header="vrac">vrac</th>
-            <th mat-sort-header="quantiteTotale">quantiteTotale</th>
-            <th mat-sort-header="montantApresRemise">montantApresRemise</th>
-            <th mat-sort-header="disponible">disponible</th>
-            <th mat-sort-header="productName">Nom</th>
-            <th>Action</th>
+            <th mat-sort-header="id">N CMD</th>
+            <th mat-sort-header="dateTransfert">Date Commande</th>
+            <th mat-sort-header="codeClient">Code Client</th>
+            <th mat-sort-header="email">Designation Client</th>
+            <th mat-sort-header="referenceTeriak">Réference</th>
           </tr>
         </thead>
         <tbody>
@@ -140,26 +132,13 @@
                 <span class="checkmarks"></span>
               </label>
             </td>
-            <td class="productimgname">
-              <a href="javascript:void(0);" class="product-img">
-                <img [src]="products.imgLink" alt="product" />
-              </a>
-              <a href="javascript:void(0);">{{ products.name }}</a>
-            </td>
             <td>{{ products.id }}</td>
-            <td>{{ products.codePCT }}</td>
-            <td>{{ products.prix }}</td>
-            <td>{{ products.remise }}</td>
-            <td>{{ products.uniteParCaisse }}</td>
-            <td>{{ products.carton }}</td>
-            <td>{{ products.vrac }}</td>
-            <td>{{ products.quantiteTotale }}</td>
-            <td>{{ products.montantApresRemise }}</td>
-            <td>{{ products.disponible }}</td>
-            <td>{{ products.productName }}</td>
-            <td>{{ products.CreatedBy }}</td>
+            <td>{{ products.dateTransfert }}</td>
+            <td>{{ products.user.codeClient }}</td>
+            <td>{{ products.user.email }}</td>
+            <td>{{ products.referenceTeriak }}</td>
             <td>
-              <a class="me-3" [routerLink]="routes.productDetails(products.id)">
+              <a class="me-3" [routerLink]="routes.commandeDetails(products.id)">
                 <img src="assets/img/icons/eye.svg" alt="img" />
               </a>
             </td>

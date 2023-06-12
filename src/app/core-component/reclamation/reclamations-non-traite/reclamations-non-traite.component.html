@@ -1,12 +1,6 @@
 <div class="page-header">
   <div class="page-title">
-    <h4>Product List</h4>
-    <h6>Manage your products</h6>
-  </div>
-  <div class="page-btn">
-    <a [routerLink]="routes.addProduct" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-        class="me-1" />Add New
-      Product</a>
+    <h4>Reclamations A Traités</h4>
   </div>
 </div>
 
@@ -51,9 +45,9 @@
     </div>
     <!-- /Filter -->
     <div class="card mb-0 border-0" [ngClass]="{
-        'show-sub-menu': showFilter == true,
-        'hide-sub-menu': showFilter == false
-      }">
+                'show-sub-menu': showFilter == true,
+                'hide-sub-menu': showFilter == false
+              }">
       <div class="card-body p-0">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
@@ -122,13 +116,10 @@
                 <span class="checkmarks"></span>
               </label>
             </th>
-            <th mat-sort-header="codePCT" style="width: 20%;">codePCT</th>
-            <th mat-sort-header="codeTeriak">Code Teriak</th>
-            <th mat-sort-header="article">Article</th>
-            <th mat-sort-header="colisage">Colisage</th>
-            <th mat-sort-header="prix">Prix</th>
-            <th mat-sort-header="image">Image</th>
-            <th>Action</th>
+            <th mat-sort-header="id">Reference</th>
+            <th mat-sort-header="dateCreation">Date Création</th>
+            <th mat-sort-header="codeClient">Code Client</th>
+            <th mat-sort-header="dateReception">Date Reception</th>
           </tr>
         </thead>
         <tbody>
@@ -139,29 +130,10 @@
                 <span class="checkmarks"></span>
               </label>
             </td>
-            <td>{{ products.codePCT }}</td>
-            <td>{{ products.codeTeriak }}</td>
-            <td>{{ products.productName }}</td>
-            <td>{{ products.carton }}</td>
-            <td>{{ products.prix }}</td>
-            <td class="productimgname">
-              <a href="javascript:void(0);" class="product-img">
-                <img [src]="products.imgLink" alt="product" />
-              </a>
-              <a href="javascript:void(0);">{{ products.name }}</a>
-            </td>
-            <td>
-              <a class="me-3" [routerLink]="routes.productDetails(products.id)">
-                <img src="assets/img/icons/eye.svg" alt="img" />
-              </a>
-              <a class="me-3" [routerLink]="routes.editProduct(products.id)">
-                <img src="assets/img/icons/edit.svg" alt="img" />
-              </a>
-
-              <a (click)="deleteBtn(products.id)" class="confirm-text" href="javascript:void(0);">
-                <img src="assets/img/icons/delete.svg" alt="img" />
-              </a>
-            </td>
+            <td>{{ products.id }}</td>
+            <td>{{ products.dateCreation }}</td>
+            <td>{{ products.user.codeClient }}</td>
+            <td>{{ products.dateReception }}</td>
           </tr>
           <tr *ngIf="tableData.length === 0">
             <td colspan="12">

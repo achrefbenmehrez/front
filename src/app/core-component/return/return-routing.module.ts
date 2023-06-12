@@ -53,6 +53,8 @@ const routes: Routes = [
   },
 ],
   },
+  { path: 'core-component/return/retoursATraite', loadChildren: () => import('./retours-atraite/retours-atraite.module').then(m => m.RetoursATraiteModule) },
+  { path: 'core-component/return/retoursTraites', loadChildren: () => import('./retours-traites/retours-traites.module').then(m => m.RetoursTraitesModule) },
 ];
 
 @NgModule({
