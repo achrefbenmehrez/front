@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ReclamationRoutingModule } from './reclamation-routing.module';
 import { ReclamationComponent } from './reclamation.component';
+import { sharedModule } from 'src/app/shared/shared.module';
+import { DatepickerModule } from 'ng2-datepicker';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ReclamationComponent } from './reclamation.component';
   ],
   imports: [
     CommonModule,
-    ReclamationRoutingModule
+    ReclamationRoutingModule,
+    sharedModule,
+    DatepickerModule,
   ]
 })
 export class ReclamationModule { }

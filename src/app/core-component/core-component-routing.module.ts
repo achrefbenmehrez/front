@@ -31,9 +31,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./purchase/purchase.module').then((m) => m.PurchaseModule),
       },
-
-
-
       {
         path: 'return',
         loadChildren: () =>
@@ -44,20 +41,16 @@ const routes: Routes = [
         loadChildren: () =>
           import('./people/people.module').then((m) => m.PeopleModule),
       },
-
-
       {
         path: 'commandes',
         loadChildren: () =>
           import('./commande/commande.module').then((m) => m.CommandeModule),
       },
-
       {
         path: 'report',
         loadChildren: () =>
           import('./report/report.module').then((m) => m.ReportModule),
       },
-
       {
         path: 'settings',
         loadChildren: () =>
@@ -73,6 +66,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./activities/activities.module').then(
             (m) => m.ActivitiesModule
+          ),
+      },
+      {
+        path: 'reclamations',
+        loadChildren: () =>
+          import('./reclamation/reclamation.module').then(
+            (m) => m.ReclamationModule
           ),
       },
     ],

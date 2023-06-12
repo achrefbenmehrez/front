@@ -32,7 +32,7 @@ export class ProductDetailsComponent implements OnInit {
   };
   productName: any;
   codePCT: any;
-  designation: any;
+  codeTeriak: any;
   uniteParCaisse: any;
   prix: any;
   avecvrac: any;
@@ -48,7 +48,7 @@ export class ProductDetailsComponent implements OnInit {
       (data: any) => {
         this.productName = data.productName;
         this.codePCT = data.codePCT;
-        this.designation = data.designation;
+        this.codeTeriak = data.codeTeriak;
         this.uniteParCaisse = data.uniteParCaisse;
         this.prix = data.prix;
         this.avecvrac = data.avecvrac;

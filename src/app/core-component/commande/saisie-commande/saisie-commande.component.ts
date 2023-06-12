@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -18,20 +18,47 @@ export class SaisieCommandeComponent {
   public tableData: Array<any> = [];
   public routes = routes;
   // pagination variables
+  public pageSize: number = 10;
   public serialNumberArray: Array<any> = [];
+  public totalData: any = 0;
   showFilter: boolean = false;
   dataSource!: MatTableDataSource<any>;
   public searchDataValue = '';
-  public prixTotal = 0;
+  purchase: any;
   //** / pagination variables
 
   constructor(
-    private data: DataService,
     private pagination: PaginationService,
     private sweetlalert: SweetalertService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private renderer: Renderer2
+
   ) {
+    this.pagination.tablePageSize.subscribe((res: tablePageSize) => {
+      if (this.router.url == this.routes.addPurchase) {
+        this.getTableData();
+        this.pageSize = res.pageSize;
+      }
+    });
+  }
+
+  deleteBtn(id: number) {
+    this.sweetlalert.deleteBtn();
+    this.http.delete(`http://localhost:8089/api/auth/delete/${id}`).subscribe(
+      (data) => {
+        // Handle success
+        console.log('Product deleted successfully:', data);
+        // Refresh user list or perform other operations as needed
+        this.getTableData();
+      },
+
+      (error) => {
+        // Handle error
+        console.error('Failed to delete product:', error);
+        // Display error message or perform other error handling as needed
+      }
+    );
   }
 
   ngOnInit() {
@@ -43,6 +70,8 @@ export class SaisieCommandeComponent {
       (data: any) => {
         // Update the tableData property with the retrieved data
         this.tableData = data;
+        this.purchase = data; // Assign the fetched data to the purchase property
+
         // Create a new MatTableDataSource with the updated tableData
         this.dataSource = new MatTableDataSource(this.tableData);
       },
@@ -79,28 +108,92 @@ export class SaisieCommandeComponent {
     }
   }
 
+
   // Other methods and component code...
 
   searchData(searchDataValue: string) {
     // Implementation for searchData method
   }
 
-  updatePrixTotal() {
-    this.prixTotal = this.tableData.reduce((total, product, remise) => {
-      if (remise != 0)
-        return total + (product.quantity || 0) * product.prix;
-      else
-        return total + (product.quantity || 0) * product.prix * (1 - product.remise / 100);
-    }, 0);
+  // ...
+
+  // ...
+
+  // ...
+  // ...
+
+  calculateMontantApresRemise(purchase: any) {
+    const price = parseFloat(purchase.prix) || 0;
+    const discount = parseFloat(purchase.remise) || 0;
+    const quantiteTotale = parseFloat(purchase.quantiteTotale) || 0;
+
+    const amountAfterDiscount = price * quantiteTotale * (1 - discount / 100);
+    purchase.montantApresRemise = amountAfterDiscount.toFixed(2);
+  }
+
+  calculateQuantities() {
+    for (const purchase of this.tableData) {
+      const carton = parseFloat(purchase.carton) || 0;
+      const vrac = parseFloat(purchase.vrac) || 0;
+      const unitPerCaisse = parseFloat(purchase.uniteParCaisse) || 1;
+
+      const totalQuantity = carton * unitPerCaisse + vrac;
+      purchase.quantiteTotale = totalQuantity.toFixed(2);
+
+      this.calculateMontantApresRemise(purchase);
+    }
+  }
+
+  cartonCalculate(event: any, purchase: any) {
+    this.calculateQuantities();
+  }
+
+  vracCalculate(event: any, purchase: any) {
+    this.calculateQuantities();
+  }
+
+  // ...
+  // ...
+
+  calculateTotalAmount(): number {
+    let totalAmount = 0;
+    for (const purchase of this.tableData) {
+      totalAmount += Number(purchase.montantApresRemise) || 0;
+    }
+    return totalAmount;
+  }
+
+  // ...
+  changeQuantity(purchase: any, field: string, increment: number) {
+    if (field === 'carton') {
+      purchase.carton += increment;
+      this.cartonCalculate(null, purchase); // Call the cartonCalculate method
+    } else if (field === 'vrac') {
+      purchase.vrac += increment;
+      this.vracCalculate(null, purchase); // Call the vracCalculate method
+    }
   }
 
   commander() {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      this.http.post('http://localhost:8089/api/commandes/' + decodedToken.sub, this.tableData
+      const selectedProducts = this.tableData.filter(purchase => purchase.quantiteTotale > 0);
+      const productsWithQuantity = selectedProducts.map(purchase => {
+        return {
+          productId: purchase.id,
+          quantity: purchase.quantiteTotale
+        };
+      });
+
+      this.http.post('http://localhost:8089/api/commandes/' + decodedToken.sub, productsWithQuantity
         .filter((product: any) => product.quantity > 0)
-        .map((product: any) => product.id)
+        .map((product: any) => {
+          return {
+            productId: product.productId,
+            quantity: product.quantity
+          };
+        })
       ).subscribe(
         (data: any) => {
           this.router.navigate([this.routes.mesCommandes]);

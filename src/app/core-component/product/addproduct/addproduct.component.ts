@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddproductComponent implements OnInit {
   codePCT = '';
-  designation = '';
+  codeTeriak = '';
   uniteParCaisse = '';
   prix = '';
   remise = '';
@@ -37,7 +37,7 @@ export class AddproductComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('codePCT', this.codePCT);
-    formData.append('designation', this.designation);
+    formData.append('codeTeriak', this.codeTeriak);
     formData.append('uniteParCaisse', this.uniteParCaisse.toString());
     formData.append('prix', this.prix.toString());
     formData.append('productName', this.productName);

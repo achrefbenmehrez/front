@@ -22,7 +22,7 @@ const routes: Routes = [
             (m) => m.AddproductModule
           ),
       },
- 
+
       {
         path: 'edit-product/:id',
         loadChildren: () =>
@@ -32,11 +32,11 @@ const routes: Routes = [
       },
       {
         path: 'product-upload',
-        loadChildren:()=>
-        import('./importproduct/importproduct.module').then(
-          (m) => m.ImportproductModule
+        loadChildren: () =>
+          import('./importproduct/importproduct.module').then(
+            (m) => m.ImportproductModule
           ),
-          },
+      },
       {
         path: 'product-details/:id',
         loadChildren: () =>
@@ -52,4 +52,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProductRoutingModule {}
+export class ProductRoutingModule { }

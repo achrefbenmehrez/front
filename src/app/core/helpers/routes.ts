@@ -136,7 +136,7 @@ export class routes {
     return this.commande + '/saisie-commande';
   }
   public static get mesLivraisons(): string {
-    return this.product + '/mes-livraisons';
+    return this.commande + '/mes-livraisons';
   }
   public static get addProduct(): string {
     return this.product + '/add-product';

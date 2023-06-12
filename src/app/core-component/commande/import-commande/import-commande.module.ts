@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ImportCommandeRoutingModule } from './import-commande-routing.module';
 import { ImportCommandeComponent } from './import-commande.component';
+import { sharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ImportCommandeComponent } from './import-commande.component';
   ],
   imports: [
     CommonModule,
-    ImportCommandeRoutingModule
+    ImportCommandeRoutingModule,
+    sharedModule
   ]
 })
 export class ImportCommandeModule { }

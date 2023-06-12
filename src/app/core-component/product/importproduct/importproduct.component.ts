@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { routes } from 'src/app/core/helpers/routes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-importproduct',
@@ -10,9 +12,9 @@ export class ImportproductComponent {
   selectedFile!: File;
   tableData: any[] = [];
   isTableVisible: boolean = false; // Added property to control table visibility
+  public routes = routes;
 
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   onFileChange(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -60,7 +62,7 @@ export class ImportproductComponent {
   fetchProductDetails(): void {
     for (const purchase of this.tableData) {
       const codePCT = purchase.codePCT;
-      this.http.get<any>(`http://localhost:8089/api/products/${codePCT}`)
+      this.http.get<any>(`http://localhost:8089/api/products/codepct/${codePCT}`)
         .subscribe(
           (response: any) => {
             console.log(`Product details fetched for codePCT ${codePCT}`);
@@ -144,33 +146,36 @@ export class ImportproductComponent {
       }
     }
   }
-  saveOrders(): void {
-    const orders = this.tableData.map((purchase) => ({
-      customerName: 'John Doe', // Replace with actual customer name
-      orderDetails: [
-        {
-          productName: purchase.designation,
-          quantity: purchase.quantiteArrondie,
-          codePct:purchase.codePCT,
-          vrac:purchase.vrac,
-          carton:purchase.carton,
-          price: purchase.prix,
-          discount: purchase.remise
-        }
-      ]
-    }));
+  saveOrders() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const selectedProducts = this.tableData.filter(purchase => purchase.quantiteTotale > 0);
+      const productsWithQuantity = selectedProducts.map(purchase => {
+        return {
+          productId: purchase.id,
+          quantity: purchase.quantiteTotale
+        };
+      });
 
-    this.http.post<any>('http://localhost:8089/api/orders', orders)
-      .subscribe(
-        (response: any) => {
-          console.log('Orders saved successfully');
-          // Handle the successful response in the UI
+      this.http.post('http://localhost:8089/api/commandes/' + decodedToken.sub, productsWithQuantity
+        .filter((product: any) => product.quantity > 0)
+        .map((product: any) => {
+          return {
+            productId: product.productId,
+            quantity: product.quantity
+          };
+        })
+      ).subscribe(
+        (data: any) => {
+          this.router.navigate([this.routes.mesCommandes]);
         },
-        (error) => {
-          console.error('Failed to save orders:', error);
-          // Handle the error in the UI
+        error => {
+          // Handle any errors that may occur during the HTTP request
+          console.error('Error fetching products data:', error);
         }
       );
+    }
   }
   calculateTotalAmount(): number {
     let totalAmount = 0;

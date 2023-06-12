@@ -12,7 +12,7 @@ export class EditproductComponent implements OnInit {
   public routes = routes;
   productName: any;
   codePCT: any;
-  designation: any;
+  codeTeriak: any;
   uniteParCaisse: any;
   prix: any;
   avecvrac: any;
@@ -28,7 +28,7 @@ export class EditproductComponent implements OnInit {
     this.http.get(`http://localhost:8089/api/products/find/${ac.snapshot.params['id']}`).subscribe((data: any) => {
       this.productName = data.productName;
       this.codePCT = data.codePCT;
-      this.designation = data.designation;
+      this.codeTeriak = data.codeTeriak;
       this.uniteParCaisse = data.uniteParCaisse;
       this.prix = data.prix;
       this.avecvrac = data.avecvrac;
@@ -54,7 +54,7 @@ export class EditproductComponent implements OnInit {
     formData.append('id', this.ac.snapshot.params['id']);
     formData.append('productName', this.productName);
     formData.append('codePCT', this.codePCT);
-    formData.append('designation', this.designation);
+    formData.append('codeTeriak', this.codeTeriak);
     formData.append('uniteParCaisse', this.uniteParCaisse.toString());
     formData.append('prix', this.prix.toString());
     formData.append('avecvrac', this.avecvrac);

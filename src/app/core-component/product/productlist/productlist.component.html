@@ -123,15 +123,13 @@
               </label>
             </th>
             <th mat-sort-header="image">image</th>
-            <th mat-sort-header="id">id</th>
-            <th mat-sort-header="codePCT">codePCT</th>
+            <th mat-sort-header="codePCT" style="width: 20%;">codePCT</th>
+            <th mat-sort-header="codeTeriak">Code Teriak</th>
             <th mat-sort-header="prix">price</th>
             <th mat-sort-header="remise">remise</th>
-            <th mat-sort-header="Unit">unite Par Caisse</th>
             <th mat-sort-header="carton">carton</th>
             <th mat-sort-header="vrac">vrac</th>
             <th mat-sort-header="quantiteTotale">quantiteTotale</th>
-            <th mat-sort-header="montantApresRemise">montantApresRemise</th>
             <th mat-sort-header="disponible">disponible</th>
             <th mat-sort-header="productName">Nom</th>
             <th>Action</th>
@@ -151,15 +149,13 @@
               </a>
               <a href="javascript:void(0);">{{ products.name }}</a>
             </td>
-            <td>{{ products.id }}</td>
             <td>{{ products.codePCT }}</td>
+            <td>{{ products.codeTeriak }}</td>
             <td>{{ products.prix }}</td>
             <td>{{ products.remise }}</td>
-            <td>{{ products.uniteParCaisse }}</td>
             <td>{{ products.carton }}</td>
             <td>{{ products.vrac }}</td>
             <td>{{ products.quantiteTotale }}</td>
-            <td>{{ products.montantApresRemise }}</td>
             <td>{{ products.disponible }}</td>
             <td>{{ products.productName }}</td>
             <td>{{ products.CreatedBy }}</td>

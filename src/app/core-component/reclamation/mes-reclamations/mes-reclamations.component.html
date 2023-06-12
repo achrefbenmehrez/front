@@ -1,9 +1,11 @@
 <div class="page-header">
   <div class="page-title">
-    <h4>Product List</h4>
-    <h6>Manage your products</h6>
+    <h4>Mes reclamations</h4>
   </div>
-
+  <div class="page-btn">
+    <a [routerLink]="routes.createReclamation" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+        class="me-1" />Create Reclamation</a>
+  </div>
 </div>
 
 <!-- /product list -->
@@ -47,9 +49,9 @@
     </div>
     <!-- /Filter -->
     <div class="card mb-0 border-0" [ngClass]="{
-        'show-sub-menu': showFilter == true,
-        'hide-sub-menu': showFilter == false
-      }">
+            'show-sub-menu': showFilter == true,
+            'hide-sub-menu': showFilter == false
+          }">
       <div class="card-body p-0">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
@@ -109,67 +111,35 @@
     <!-- /Filter -->
     <div class="table-responsive">
       <table (matSortChange)="sortData($event)" matSort matSortActive="Sno" matSortDirection="asc" matSortDisableClear
-        class="table table-fit" id="printTable">
+        class="table" id="printTable">
         <thead>
           <tr>
-            <th mat-sort-header="image">Image</th>
-            <th mat-sort-header="codePCT">Code PCT</th>
-            <th mat-sort-header="designation">Désignation</th>
-            <th mat-sort-header="uniteParCaisse">Unités par caisse</th>
-            <th mat-sort-header="prix">Prix</th>
-            <th mat-sort-header="remise">Remise</th>
-            <th mat-sort-header="carton">Carton</th>
-            <th mat-sort-header="vrac"> VRAC </th>
-            <th mat-sort-header="quantiteTotale">Quantité totale</th>
-            <th mat-sort-header="montantApresRemise">Mantant aprés remise</th>
-            <th mat-sort-header="disponible">Disponibilité</th>
-            <th></th>
+            <th>
+              <label class="checkboxs" (click)="selectAll(initChecked)">
+                <input type="checkbox" [(ngModel)]="initChecked" />
+                <span class="checkmarks"></span>
+              </label>
+            </th>
+            <th mat-sort-header="id">Reference</th>
+            <th mat-sort-header="dateCreation">Date Création</th>
+            <th mat-sort-header="description">Description</th>
+            <th mat-sort-header="envoyee">Envoyée</th>
+            <th mat-sort-header="traitee">Traitée</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let purchase of tableData; let i = index">
-            <td class="productimgname">
-              <a class="product-img">
-                <img [src]="purchase.imgLink" alt="product" />
-              </a>
-              <a href="javascript:void(0);">{{ purchase.ProductName }}</a>
-            </td>
-            <td>{{ purchase.codePCT }}</td>
-            <td>{{ purchase.designation }}</td>
-            <td>{{ purchase.uniteParCaisse }}</td>
-            <td>{{ purchase.prix }}</td>
-            <td>% {{ purchase.remise }}</td>
+          <tr *ngFor="let products of tableData; let i = index">
             <td>
-              <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'carton', 1)"></button>
-              <input type="number" class="form-control" [(ngModel)]="purchase.carton"
-                (ngModelChange)="cartonCalculate($event, purchase)" />
-              <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'carton', -1)"></button>
+              <label class="checkboxs">
+                <input type="checkbox" [(ngModel)]="products.isSelected" />
+                <span class="checkmarks"></span>
+              </label>
             </td>
-            <td>
-              <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', 1)"></button>
-              <input type="number" class="form-control" [(ngModel)]="purchase.vrac"
-                (ngModelChange)="vracCalculate($event, purchase)" />
-              <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', -1)"></button>
-            </td>
-
-
-            <td>
-              <input type="text" [(ngModel)]="purchase.quantiteTotale" id="quantiteTotale{{i}}" disabled />
-            </td>
-            <td>
-              <input type="text" [(ngModel)]="purchase.montantApresRemise" id="montantApresRemise{{i}}" disabled />
-            </td>
-            <td>
-              <button type="button" [ngClass]="{
-                  'btn-success': purchase.disponible,
-                  'btn-danger': !purchase.disponible
-                }" class="me-1 btn btn-rounded">
-                {{ purchase.disponible ? 'En Stock' : 'En Rupture' }}
-              </button>
-            </td>
-            <td>
-
-            </td>
+            <td>{{ products.id }}</td>
+            <td>{{ products.dateCreation }}</td>
+            <td>{{ products.description }}</td>
+            <td>{{ products.envoyee }}</td>
+            <td>{{ products.traitee }}</td>
           </tr>
           <tr *ngIf="tableData.length === 0">
             <td colspan="12">
@@ -179,26 +149,6 @@
         </tbody>
       </table>
       <custom-pagination></custom-pagination>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 float-md-right">
-        <div class="total-order">
-          <ul>
-            <li>
-              <h4>Remise</h4>
-              <h5>% 0.00</h5>
-            </li>
-            <li class="total">
-              <h4>Total</h4>
-              <h5>Tnd {{ calculateTotalAmount() | number:'1.2-2' }}</h5>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-12">
-      <a (click)="commander()" class="btn btn-submit me-2">Submit</a>
-      <a [routerLink]="routes.purchaseList" class="btn btn-cancel">Cancel</a>
     </div>
   </div>
 </div>

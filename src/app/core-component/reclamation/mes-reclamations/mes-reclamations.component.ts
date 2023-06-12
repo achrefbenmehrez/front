@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataService, pageSelection, routes } from 'src/app/core/core.index';
+import { Router } from '@angular/router';
+import { routes, DataService, pageSelection } from 'src/app/core/core.index';
 import { PaginationService, tablePageSize } from 'src/app/shared/shared.index';
 import { SweetalertService } from 'src/app/shared/sweetalert/sweetalert.service';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { apiResultFormat } from 'src/app/core/core.index';
 
 @Component({
-  selector: 'app-productlist',
-  templateUrl: './productlist.component.html',
-  styleUrls: ['./productlist.component.scss'],
+  selector: 'app-mes-reclamations',
+  templateUrl: './mes-reclamations.component.html',
+  styleUrls: ['./mes-reclamations.component.scss']
 })
-export class ProductlistComponent implements OnInit {
+export class MesReclamationsComponent {
   initChecked: boolean = false;
   products: any[] = [];
   public tableData: Array<any> = [];
@@ -42,41 +41,28 @@ export class ProductlistComponent implements OnInit {
     });
   }
 
-  deleteBtn(id: number) {
-    this.sweetlalert.deleteBtn();
-    this.http.delete(`http://localhost:8089/api/products/delete/${id}`).subscribe(
-      (data) => {
-        // Handle success
-        console.log('Product deleted successfully:', data);
-        // Refresh user list or perform other operations as needed
-        this.getTableData();
-      },
-      
-      (error) => {
-        // Handle error
-        console.error('Failed to delete product:', error);
-        // Display error message or perform other error handling as needed
-      }
-    );
-  }
- 
   ngOnInit() {
     this.getTableData();
   }
 
   private getTableData(pageOption: pageSelection = { skip: 0, limit: 10 }): void {
-    this.http.get('http://localhost:8089/api/products/all').subscribe(
-      (data: any) => {
-        // Update the tableData property with the retrieved data
-        this.tableData = data;
-        // Create a new MatTableDataSource with the updated tableData
-        this.dataSource = new MatTableDataSource(this.tableData);
-      },
-      error => {
-        // Handle any errors that may occur during the HTTP request
-        console.error('Error fetching user data:', error);
-      }
-    );
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const headers = new HttpHeaders({ Authorization: 'Bearer ' + token });
+      this.http.get('http://localhost:8089/api/reclamations/by-user-email?userEmail=' + decodedToken.sub, { headers }).subscribe(
+        (data: any) => {
+          // Update the tableData property with the retrieved data
+          this.tableData = data;
+          // Create a new MatTableDataSource with the updated tableData
+          this.dataSource = new MatTableDataSource(this.tableData);
+        },
+        error => {
+          // Handle any errors that may occur during the HTTP request
+          console.error('Error fetching reclamations data:', error);
+        }
+      );
+    }
   }
 
   public sortData(sort: Sort) {
@@ -108,7 +94,6 @@ export class ProductlistComponent implements OnInit {
   // Other methods and component code...
 
   searchData(searchDataValue: string) {
-    
+    // Implementation for searchData method
   }
-
 }
