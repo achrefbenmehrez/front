@@ -75,8 +75,15 @@ const routes: Routes = [
             (m) => m.ReclamationModule
           ),
       },
+      {
+        path: 'messages',
+        loadChildren: () =>
+          import('./message/message.module').then(
+            (m) => m.MessageModule
+          ),
+      },
     ],
-  },
+  }
 ];
 
 @NgModule({

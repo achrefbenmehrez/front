@@ -225,7 +225,19 @@ export class routes {
     return this.baseUrl + '/contact';
   }
   public static get messages(): string {
-    return this.contact + '/messages';
+    return this.baseUrl + '/messages';
+  }
+  public static get listeMessages(): string {
+    return this.messages + '/liste-messages';
+  }
+  public static get ajouterMessage(): string {
+    return this.messages + '/ajouter-message';
+  }
+  public static editMessage(id: any): string {
+    return this.messages + '/modifier-message/' + id;
+  }
+  public static listeDiffusion(id: any): string {
+    return this.messages + '/liste-diffusion/' + id;
   }
   public static get emailsToClients(): string {
     return this.contact + '/emails-to-clients';
