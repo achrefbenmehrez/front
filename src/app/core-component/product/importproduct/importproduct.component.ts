@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { routes } from 'src/app/core/helpers/routes';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-importproduct',
@@ -13,8 +14,15 @@ export class ImportproductComponent {
   tableData: any[] = [];
   isTableVisible: boolean = false; // Added property to control table visibility
   public routes = routes;
+  userrr: any;
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  ngOnInit(): void {
+    this.getUserByToken().subscribe((res: any) => {
+      this.userrr = res;
+    });
+  }
 
   onFileChange(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -182,6 +190,15 @@ export class ImportproductComponent {
     for (const purchase of this.tableData) {
       totalAmount += Number(purchase.montantApresRemise) || 0;
     }
-    return totalAmount;
+    return totalAmount - totalAmount * this.userrr.remise;
+  }
+
+  getUserByToken(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+      return this.http.get<any>('http://localhost:8089/api/users/profile', { headers });
+    }
+    return this.http.get<any>('http://localhost:8089/api/users/profile');
   }
 }

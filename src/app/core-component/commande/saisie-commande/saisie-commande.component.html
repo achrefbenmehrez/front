@@ -121,7 +121,7 @@
             <th mat-sort-header="carton">Carton</th>
             <th mat-sort-header="vrac"> VRAC </th>
             <th mat-sort-header="quantiteTotale">Quantité totale</th>
-            <th mat-sort-header="montantApresRemise">Mantant aprés remise</th>
+            <th mat-sort-header="montantApresRemise">Montant aprés remise</th>
             <th mat-sort-header="disponible">Disponibilité</th>
             <th></th>
           </tr>
@@ -132,22 +132,28 @@
               <a class="product-img">
                 <img [src]="purchase.imgLink" alt="product" />
               </a>
-              <a href="javascript:void(0);">{{ purchase.ProductName }}</a>
             </td>
-            <td>{{ purchase.codePCT }}</td>
-            <td>{{ purchase.designation }}</td>
-            <td>{{ purchase.uniteParCaisse }}</td>
-            <td>{{ purchase.prix }}</td>
-            <td>% {{ purchase.remise }}</td>
+            <td>
+              {{ purchase.codePCT }}</td>
+            <td>
+              {{ purchase.productName }}
+            </td>
+            <td>
+              {{ purchase.uniteParCaisse }}</td>
+            <td>
+              {{ purchase.prix }}</td>
+            <td>%
+              {{ purchase.remise }}
+            </td>
             <td>
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'carton', 1)"></button>
-              <input type="number" class="form-control" [(ngModel)]="purchase.carton"
+              <input type="number" class="form-control" [(ngModel)]="purchase.carton" minlength="0"
                 (ngModelChange)="cartonCalculate($event, purchase)" />
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'carton', -1)"></button>
             </td>
-            <td>
+            <td [class.bg-danger]='purchase.avecvrac == "1"' [class.text-white]='purchase.avecvrac == "1"'>
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', 1)"></button>
-              <input type="number" class="form-control" [(ngModel)]="purchase.vrac"
+              <input type="number" class="form-control" [(ngModel)]="purchase.vrac" minlength="0"
                 (ngModelChange)="vracCalculate($event, purchase)" />
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', -1)"></button>
             </td>
@@ -185,8 +191,8 @@
         <div class="total-order">
           <ul>
             <li>
-              <h4>Remise</h4>
-              <h5>% 0.00</h5>
+              <h4>Remise Client</h4>
+              <h5>{{ userrr.remise * 100 }} %</h5>
             </li>
             <li class="total">
               <h4>Total</h4>

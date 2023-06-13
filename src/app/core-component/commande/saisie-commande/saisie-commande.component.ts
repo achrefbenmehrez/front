@@ -3,6 +3,7 @@ import { Component, Renderer2 } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { routes, DataService, pageSelection } from 'src/app/core/core.index';
 import { PaginationService, tablePageSize } from 'src/app/shared/shared.index';
 import { SweetalertService } from 'src/app/shared/sweetalert/sweetalert.service';
@@ -25,6 +26,7 @@ export class SaisieCommandeComponent {
   dataSource!: MatTableDataSource<any>;
   public searchDataValue = '';
   purchase: any;
+  userrr: any;
   //** / pagination variables
 
   constructor(
@@ -63,6 +65,9 @@ export class SaisieCommandeComponent {
 
   ngOnInit() {
     this.getTableData();
+    this.getUserByToken().subscribe((user: any) => {
+      this.userrr = user;
+    });
   }
 
   private getTableData(pageOption: pageSelection = { skip: 0, limit: 10 }): void {
@@ -160,7 +165,7 @@ export class SaisieCommandeComponent {
     for (const purchase of this.tableData) {
       totalAmount += Number(purchase.montantApresRemise) || 0;
     }
-    return totalAmount;
+    return totalAmount - totalAmount * this.userrr.remise;
   }
 
   // ...
@@ -204,5 +209,14 @@ export class SaisieCommandeComponent {
         }
       );
     }
+  }
+
+  getUserByToken(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+      return this.http.get<any>('http://localhost:8089/api/users/profile', { headers });
+    }
+    return this.http.get<any>('http://localhost:8089/api/users/profile');
   }
 }
