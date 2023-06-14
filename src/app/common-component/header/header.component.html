@@ -1,45 +1,26 @@
 <!-- Header -->
-<div
-  class="header"
-  [ngClass]="{
+<div class="header" [ngClass]="{
     'header-one': changeLayout == '2',
     'header-two': changeLayout == '3',
     'header-three': changeLayout == '4',
     'header-four': changeLayout == '5'
-  }"
->
+  }">
   <div [class.container]="changeLayout == '3' || changeLayout == '4'">
     <!-- Logo -->
-    <div
-      (mouseover)="miniSideBarMouseHover('over')"
-      (mouseout)="miniSideBarMouseHover('out')"
-      class="header-left"
-      [class.active]="miniSidebar == false"
-      *ngIf="activePath != 'pos'"
-    >
+    <div (mouseover)="miniSideBarMouseHover('over')" (mouseout)="miniSideBarMouseHover('out')" class="header-left"
+      [class.active]="miniSidebar == false" *ngIf="activePath != 'pos'">
       <a [routerLink]="routes.dashboard" class="logo">
         <img [src]="logoPath" alt="" />
       </a>
       <a [routerLink]="routes.dashboard" class="logo-small">
         <img src="assets/img/logo-small.png" alt="" />
       </a>
-      <a
-        (click)="toggleSidebar()"
-        id="toggle_btn"
-        [class.active]="miniSidebar == false"
-        *ngIf="changeLayout == '1' || changeLayout == '3'"
-        href="javascript:void(0);"
-      >
+      <a (click)="toggleSidebar()" id="toggle_btn" [class.active]="miniSidebar == false"
+        *ngIf="changeLayout == '1' || changeLayout == '3'" href="javascript:void(0);">
       </a>
     </div>
-    <div
-      class="header-left"
-      (mouseover)="miniSideBarMouseHover('over')"
-      (mouseout)="miniSideBarMouseHover('out')"
-      [class.active]="miniSidebar == false"
-      *ngIf="activePath === 'pos'"
-      style="border-right: none"
-    >
+    <div class="header-left" (mouseover)="miniSideBarMouseHover('over')" (mouseout)="miniSideBarMouseHover('out')"
+      [class.active]="miniSidebar == false" *ngIf="activePath === 'pos'" style="border-right: none">
       <a [routerLink]="routes.dashboard" class="logo" (click)="toggleSidebar()">
         <img [src]="logoPath" alt="" />
       </a>
@@ -49,12 +30,7 @@
     </div>
     <!-- /Logo -->
 
-    <a
-      id="mobile_btn"
-      class="mobile_btn"
-      (click)="togglesMobileSideBar()"
-      *ngIf="activePath != 'pos'"
-    >
+    <a id="mobile_btn" class="mobile_btn" (click)="togglesMobileSideBar()" *ngIf="activePath != 'pos'">
       <span class="bar-icon">
         <span></span>
         <span></span>
@@ -70,21 +46,12 @@
         <div class="searchinputs" [ngClass]="{ show: showSearch == true }">
           <input type="text" placeholder="Search Here ..." />
           <div class="search-addon">
-            <span (click)="showSearch = !showSearch"
-              ><img
-                *ngIf="showSearch == true"
-                src="assets/img/icons/closes.svg"
-                alt="img"
-            /></span>
+            <span (click)="showSearch = !showSearch"><img *ngIf="showSearch == true" src="assets/img/icons/closes.svg"
+                alt="img" /></span>
           </div>
         </div>
-        <a
-          *ngIf="showSearch == false"
-          (click)="showSearch = !showSearch"
-          class="btn"
-          id="searchdiv"
-          ><img src="assets/img/icons/search.svg" alt="img"
-        /></a>
+        <a *ngIf="showSearch == false" (click)="showSearch = !showSearch" class="btn" id="searchdiv"><img
+            src="assets/img/icons/search.svg" alt="img" /></a>
       </form>
     </div>
     <!-- Header Menu -->
@@ -99,21 +66,12 @@
             <div class="searchinputs" [ngClass]="{ show: showSearch == true }">
               <input type="text" placeholder="Search Here ..." />
               <div class="search-addon">
-                <span (click)="showSearch = !showSearch"
-                  ><img
-                    *ngIf="showSearch == true"
-                    src="assets/img/icons/filter.svg"
-                    alt="img"
-                /></span>
+                <span (click)="showSearch = !showSearch"><img *ngIf="showSearch == true"
+                    src="assets/img/icons/filter.svg" alt="img" /></span>
               </div>
             </div>
-            <a
-              *ngIf="showSearch == false"
-              (click)="showSearch = !showSearch"
-              class="btn"
-              id="searchdiv"
-              ><img src="assets/img/icons/search.svg" alt="img"
-            /></a>
+            <a *ngIf="showSearch == false" (click)="showSearch = !showSearch" class="btn" id="searchdiv"><img
+                src="assets/img/icons/search.svg" alt="img" /></a>
           </form>
         </div>
       </li>
@@ -121,12 +79,7 @@
 
       <!-- Flag -->
       <li class="nav-item dropdown has-arrow flag-nav">
-        <a
-          class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown"
-          href="javascript:void(0);"
-          role="button"
-        >
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
           <img src="assets/img/flags/us1.png" alt="" height="20" />
         </a>
         <div class="dropdown-menu dropdown-menu-right">
@@ -142,11 +95,7 @@
 
       <!-- Notifications -->
       <li class="nav-item dropdown">
-        <a
-          href="javascript:void(0);"
-          class="dropdown-toggle nav-link"
-          data-bs-toggle="dropdown"
-        >
+        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
           <img src="assets/img/icons/notification-bing.svg" alt="img" />
           <span class="badge rounded-pill">4</span>
         </a>
@@ -166,9 +115,7 @@
                     <div class="media-body flex-grow-1">
                       <p class="noti-details">
                         <span class="noti-title">John Doe</span> added new task
-                        <span class="noti-title"
-                          >Patient appointment booking</span
-                        >
+                        <span class="noti-title">Patient appointment booking</span>
                       </p>
                       <p class="noti-time">
                         <span class="notification-time">4 mins ago</span>
@@ -187,9 +134,7 @@
                       <p class="noti-details">
                         <span class="noti-title">Tarah Shropshire</span> changed
                         the task name
-                        <span class="noti-title"
-                          >Appointment booking with payment gateway</span
-                        >
+                        <span class="noti-title">Appointment booking with payment gateway</span>
                       </p>
                       <p class="noti-time">
                         <span class="notification-time">6 mins ago</span>
@@ -228,9 +173,7 @@
                       <p class="noti-details">
                         <span class="noti-title">Rolland Webber</span> completed
                         task
-                        <span class="noti-title"
-                          >Patient and Doctor video conferencing</span
-                        >
+                        <span class="noti-title">Patient and Doctor video conferencing</span>
                       </p>
                       <p class="noti-time">
                         <span class="notification-time">12 mins ago</span>
@@ -268,64 +211,41 @@
       <!-- /Notifications -->
 
       <li class="nav-item dropdown has-arrow main-drop">
-        <a
-          href="javascript:void(0);"
-          class="dropdown-toggle nav-link userset"
-          data-bs-toggle="dropdown"
-        >
-          <span class="user-img"
-            ><img
-              [src]="
+        <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+          <span class="user-img"><img [src]="
                 this.userrr.profileImagePath
                   ? this.userrr?.profileImagePath
                   : 'https://ui-avatars.com/api/?background=random&name=' +
                     this.userrr.username +
                     '&rounded=true'
-              "
-              alt="" />
-            <span class="status online"></span
-          ></span>
+              " alt="" />
+            <span class="status online"></span></span>
         </a>
         <div class="dropdown-menu menu-drop-user">
           <div class="profilename">
             <div class="profileset">
-              <span class="user-img"
-                ><img
-                  [src]="
+              <span class="user-img"><img [src]="
                     this.userrr.profileImagePath
                       ? this.userrr?.profileImagePath
                       : 'https://ui-avatars.com/api/?background=random&name=' +
                         this.userrr.username +
                         '&rounded=true'
-                  "
-                  alt="" />
-                <span class="status online"></span
-              ></span>
+                  " alt="" />
+                <span class="status online"></span></span>
               <div class="profilesets">
                 <h6>{{ this.userrr.email }}</h6>
                 <h5>{{ this.userrr.role }}</h5>
               </div>
             </div>
             <hr class="m-0" />
-            <a class="dropdown-item" [routerLink]="routes.profile"
-              ><img src="assets/img/icons/users1.svg" class="me-2" alt="img" />
-              My Profile</a
-            >
-            <a class="dropdown-item" [routerLink]="routes.generalSettings"
-              ><img
-                src="assets/img/icons/settings.svg"
-                class="me-1"
-                alt="img"
-              />Settings</a
-            >
+            <a class="dropdown-item" [routerLink]="routes.profile"><img src="assets/img/icons/users1.svg" class="me-2"
+                alt="img" />
+              My Profile</a>
+            <a class="dropdown-item" [routerLink]="routes.generalSettings"><img src="assets/img/icons/settings.svg"
+                class="me-1" alt="img" />Settings</a>
             <hr class="m-0" />
-            <a class="dropdown-item logout pb-0" (click)="logout()"
-              ><img
-                src="assets/img/icons/log-out.svg"
-                class="me-2"
-                alt="img"
-              />Logout</a
-            >
+            <a class="dropdown-item logout pb-0" (click)="logout()"><img src="assets/img/icons/log-out.svg" class="me-2"
+                alt="img" />Logout</a>
           </div>
         </div>
       </li>
@@ -334,18 +254,11 @@
 
     <!-- Mobile Menu -->
     <div class="dropdown mobile-user-menu">
-      <a
-        href="javascript:void(0);"
-        class="nav-link dropdown-toggle"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        ><i class="fa fa-ellipsis-v"></i
-      ></a>
+      <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+          class="fa fa-ellipsis-v"></i></a>
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" [routerLink]="routes.profile">My Profile</a>
-        <a class="dropdown-item" [routerLink]="routes.generalSettings"
-          >Settings</a
-        >
+        <a class="dropdown-item" [routerLink]="routes.generalSettings">Settings</a>
         <a class="dropdown-item" [routerLink]="routes.signIn">Logout</a>
       </div>
     </div>
@@ -353,3 +266,6 @@
   </div>
 </div>
 <!-- Header -->
+<div class="subheader">
+  <span class="scrolling-text">{{text}}</span>
+</div>

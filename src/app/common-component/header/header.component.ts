@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   public logoPath: string = '';
   public miniSidebar: boolean = false;
   profileImagePath = '';
+  text = '';
   constructor(
     private Router: Router,
     private settings: SettingsService,
@@ -58,6 +59,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getUserByToken().subscribe((user: any) => {
       this.userrr = user;
+      this.http.get("http://localhost:8089/api/messages/diffuse/" + user.id).subscribe((res: any) => {
+        const text = res.map((item: any) => item.content).join(' ') + '.';
+        this.text = text;
+      }
+      );
     });
   }
 
