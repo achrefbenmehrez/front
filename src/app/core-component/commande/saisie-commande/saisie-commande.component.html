@@ -153,9 +153,9 @@
             </td>
             <td>
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', 1)"></button>
-              <input type="number" class="form-control" [(ngModel)]="purchase.vrac" minlength="0"
-                (ngModelChange)="vracCalculate($event, purchase)" [class.bg-danger]='purchase.avecvrac == "1"'
-                [class.text-white]='purchase.avecvrac == "1"' />
+              <input [disabled]='purchase.avecvrac == "1"' type="number" class="form-control"
+                [(ngModel)]="purchase.vrac" minlength="0" (ngModelChange)="vracCalculate($event, purchase)"
+                [class.bg-danger]='purchase.avecvrac == "1"' [class.text-white]='purchase.avecvrac == "1"' />
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', -1)"></button>
             </td>
 

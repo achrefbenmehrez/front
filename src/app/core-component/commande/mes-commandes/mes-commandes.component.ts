@@ -51,13 +51,10 @@ export class MesCommandesComponent {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       this.http.get('http://localhost:8089/api/commandes/by-client/' + decodedToken.sub).subscribe(
         (data: any) => {
-          // Update the tableData property with the retrieved data
           this.tableData = data;
-          // Create a new MatTableDataSource with the updated tableData
           this.dataSource = new MatTableDataSource(this.tableData);
         },
         error => {
-          // Handle any errors that may occur during the HTTP request
           console.error('Error fetching user data:', error);
         }
       );
