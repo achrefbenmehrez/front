@@ -24,3 +24,12 @@
     }
   }
   
+  .header{
+    position: relative;
+    z-index: 2;
+  }
+  
+  .subheader {
+    position: relative;
+    z-index: 1;
+  }
