@@ -151,13 +151,13 @@
                 (ngModelChange)="cartonCalculate($event, purchase)" />
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'carton', -1)"></button>
             </td>
-            <td [class.bg-danger]='purchase.avecvrac == "1"' [class.text-white]='purchase.avecvrac == "1"'>
+            <td>
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', 1)"></button>
               <input type="number" class="form-control" [(ngModel)]="purchase.vrac" minlength="0"
-                (ngModelChange)="vracCalculate($event, purchase)" />
+                (ngModelChange)="vracCalculate($event, purchase)" [class.bg-danger]='purchase.avecvrac == "1"'
+                [class.text-white]='purchase.avecvrac == "1"' />
               <button class="btn btn-quantity" (click)="changeQuantity(purchase, 'vrac', -1)"></button>
             </td>
-
 
             <td>
               <input type="text" [(ngModel)]="purchase.quantiteTotale" id="quantiteTotale{{i}}" disabled />

@@ -113,70 +113,79 @@ export class SaisieCommandeComponent {
     }
   }
 
-
-  // Other methods and component code...
-
   searchData(searchDataValue: string) {
     // Implementation for searchData method
   }
 
-  // ...
-
-  // ...
-
-  // ...
-  // ...
-
   calculateMontantApresRemise(purchase: any) {
     const price = parseFloat(purchase.prix) || 0;
     const discount = parseFloat(purchase.remise) || 0;
-    const quantiteTotale = parseFloat(purchase.quantiteTotale) || 0;
+    const quantiteArrondie = parseFloat(purchase.quantiteArrondie) || 0;
 
-    const amountAfterDiscount = price * quantiteTotale * (1 - discount / 100);
+    const amountAfterDiscount = price * quantiteArrondie * (1 - discount / 100);
     purchase.montantApresRemise = amountAfterDiscount.toFixed(2);
   }
 
   calculateQuantities() {
     for (const purchase of this.tableData) {
-      const carton = parseFloat(purchase.carton) || 0;
-      const vrac = parseFloat(purchase.vrac) || 0;
       const unitPerCaisse = parseFloat(purchase.uniteParCaisse) || 1;
+      const quantiteTotale = parseFloat(purchase.quantiteDemande) || 0;
 
-      const totalQuantity = carton * unitPerCaisse + vrac;
-      purchase.quantiteTotale = totalQuantity.toFixed(2);
+      if (purchase.avecvrac == 0) {
+        // Product cannot be sold in vrac
+        const roundedQuantiteArrondie = Math.ceil(quantiteTotale / unitPerCaisse) * unitPerCaisse;
+        purchase.carton = Math.floor(roundedQuantiteArrondie / unitPerCaisse);
+        purchase.vrac = 0;
+        purchase.quantiteArrondie = roundedQuantiteArrondie;
+      } else {
+        // Product can be sold in vrac
+        purchase.carton = Math.floor(quantiteTotale / unitPerCaisse);
+        purchase.vrac = quantiteTotale % unitPerCaisse;
+        purchase.quantiteArrondie = purchase.carton * unitPerCaisse + purchase.vrac;
+      }
 
       this.calculateMontantApresRemise(purchase);
     }
   }
 
   cartonCalculate(event: any, purchase: any) {
-    this.calculateQuantities();
+    const unitPerCaisse = parseFloat(purchase.uniteParCaisse) || 1;
+    const carton = parseFloat(purchase.carton) || 0;
+    purchase.quantiteArrondie = carton * unitPerCaisse + purchase.vrac;
+    purchase.quantiteTotale = purchase.quantiteArrondie;
+
+    this.calculateMontantApresRemise(purchase);
   }
 
   vracCalculate(event: any, purchase: any) {
-    this.calculateQuantities();
+    const unitPerCaisse = parseFloat(purchase.uniteParCaisse) || 1;
+    const carton = parseFloat(purchase.carton) || 0;
+    purchase.quantiteArrondie = carton * unitPerCaisse + purchase.vrac;
+    purchase.quantiteTotale = purchase.quantiteArrondie;
+
+    this.calculateMontantApresRemise(purchase);
   }
 
-  // ...
-  // ...
+  changeQuantity(purchase: any, field: string, increment: number) {
+    if (field === 'carton') {
+      if (purchase.carton + increment >= 0) {
+        purchase.carton += increment;
+        this.cartonCalculate(null, purchase);
+      }
+    } else if (field === 'vrac') {
+      if (purchase.vrac + increment >= 0) {
+        purchase.vrac += increment;
+        this.vracCalculate(null, purchase);
+      }
+    }
+  }
 
   calculateTotalAmount(): number {
     let totalAmount = 0;
     for (const purchase of this.tableData) {
       totalAmount += Number(purchase.montantApresRemise) || 0;
     }
-    return totalAmount - totalAmount * this.userrr.remise;
-  }
-
-  // ...
-  changeQuantity(purchase: any, field: string, increment: number) {
-    if (field === 'carton') {
-      purchase.carton += increment;
-      this.cartonCalculate(null, purchase); // Call the cartonCalculate method
-    } else if (field === 'vrac') {
-      purchase.vrac += increment;
-      this.vracCalculate(null, purchase); // Call the vracCalculate method
-    }
+    return totalAmount;
   }
 
   commander() {

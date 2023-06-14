@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
     this.getUserByToken().subscribe((user: any) => {
       this.userrr = user;
       this.http.get("http://localhost:8089/api/messages/diffuse/" + user.id).subscribe((res: any) => {
-        const text = res.map((item: any) => item.content).join(' ') + '.';
+        const text = res.map((item: any) => item.content);
         this.text = text;
       }
       );
