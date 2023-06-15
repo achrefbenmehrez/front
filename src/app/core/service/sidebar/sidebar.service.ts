@@ -197,32 +197,13 @@ export class SidebarService {
                 ],
               },
               {
-                tittle: 'Contact',
-                hasSubRoute: true,
-                icon: 'assets/img/icons/settings.svg',
+                tittle: 'Annonces',
+                hasSubRoute: false,
+                icon: 'assets/img/icons/mail.svg',
                 showSubRoute: false,
-                route: routes.messages,
-                activeRoute: this.getActiveRoute(routes.settings),
-                subRoutes: [
-                  {
-                    tittle: 'Emails to clients',
-                    hasSubRoute: false,
-                    icon: '',
-                    showSubRoute: false,
-                    route: routes.emailsToClients,
-                    activeRoute: this.getActiveRoute(routes.emailsToClients),
-                    subRoutes: [],
-                  },
-                  {
-                    tittle: 'Annonces des grossistes',
-                    hasSubRoute: false,
-                    icon: '',
-                    showSubRoute: false,
-                    route: routes.annoncesGrossistes,
-                    activeRoute: this.getActiveRoute(routes.annoncesGrossistes),
-                    subRoutes: [],
-                  }
-                ],
+                route: routes.annonces,
+                activeRoute: this.getActiveRoute(routes.annonces),
+                subRoutes: [],
               },
               {
                 tittle: 'Retour',

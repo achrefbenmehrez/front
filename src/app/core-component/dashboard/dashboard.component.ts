@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import {
@@ -35,6 +36,20 @@ import { routes } from 'src/app/core/helpers/routes';
 })
 export class DashboardComponent implements OnInit {
   public routes = routes;
+  public annonces: any[] = [];
+
+  private getTableData(): void {
+    this.http.get('http://localhost:8089/api/annonces').subscribe(
+      (data: any) => {
+        // Update the tableData property with the retrieved data
+        this.annonces = data;
+      },
+      error => {
+        // Handle any errors that may occur during the HTTP request
+        console.error('Error fetching annonce data:', error);
+      }
+    );
+  }
 
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -105,7 +120,7 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  constructor(private common: CommonService) {
+  constructor(private http: HttpClient, private common: CommonService) {
     this.chartOptions = {
       series: [
         {
@@ -127,7 +142,7 @@ export class DashboardComponent implements OnInit {
           enabled: true,
         },
       },
-      
+
       responsive: {
         breakpoint: 280,
         options: {
@@ -191,7 +206,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getTableData();
+  }
 
   public sortRecentlyAddedProducts(sort: Sort) {
     const data = this.recentlyAddedProducts.slice();

@@ -82,6 +82,13 @@ const routes: Routes = [
             (m) => m.MessageModule
           ),
       },
+      {
+        path: 'annonces',
+        loadChildren: () =>
+          import('./annonce/annonce.module').then(
+            (m) => m.AnnonceModule
+          ),
+      }
     ],
   }
 ];

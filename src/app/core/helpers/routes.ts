@@ -242,8 +242,8 @@ export class routes {
   public static get emailsToClients(): string {
     return this.contact + '/emails-to-clients';
   }
-  public static get annoncesGrossistes(): string {
-    return this.contact + '/annonces-grossistes';
+  public static get annonces(): string {
+    return this.baseUrl + '/annonces';
   }
 
   public static get purchaseList(): string {

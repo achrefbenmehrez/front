@@ -65,5 +65,4 @@ export class AddproductComponent implements OnInit {
       }
     );
   }
-
 }
