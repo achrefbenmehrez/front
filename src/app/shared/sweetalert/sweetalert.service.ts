@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 
@@ -30,6 +31,7 @@ export class SweetalertService {
           'Deleted!',
           'Your file has been deleted.',
           'success'
+         
         )
       } else if (
         /* Read more about handling dismissals below */

@@ -59,11 +59,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getUserByToken().subscribe((user: any) => {
       this.userrr = user;
-      this.http.get("http://localhost:8089/api/messages/diffuse/" + user.id).subscribe((res: any) => {
-        const text = res.map((item: any) => item.content);
-        this.text = text;
-      }
-      );
+      this.http
+        .get('http://localhost:8089/api/messages/diffuse/' + user.id)
+        .subscribe((res: any) => {
+          const text = res.map((item: any) => item.content);
+          this.text = text;
+        });
     });
   }
 

@@ -5,7 +5,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { apiResultFormat, DataService, pageSelection, routes } from 'src/app/core/core.index';
+import {
+  apiResultFormat,
+  DataService,
+  pageSelection,
+  routes,
+} from 'src/app/core/core.index';
 import { PaginationService, tablePageSize } from 'src/app/shared/shared.index';
 import { SweetalertService } from 'src/app/shared/sweetalert/sweetalert.service';
 
@@ -32,8 +37,7 @@ export class UserlistComponent implements OnInit {
     private pagination: PaginationService,
     private sweetalert: SweetalertService,
     private router: Router,
-    private jwtHelper: JwtHelperService,
-    
+    private jwtHelper: JwtHelperService
   ) {
     this.pagination.tablePageSize.subscribe((res: tablePageSize) => {
       if (this.router.url == this.routes.userList) {
@@ -43,7 +47,9 @@ export class UserlistComponent implements OnInit {
     });
   }
 
-  private getTableData(pageOption: pageSelection = { skip: 0, limit: 10 }): void {
+  private getTableData(
+    pageOption: pageSelection = { skip: 0, limit: 10 }
+  ): void {
     this.http.get('http://localhost:8089/api/users/all').subscribe(
       (data: any) => {
         // Update the tableData property with the retrieved data
@@ -51,7 +57,7 @@ export class UserlistComponent implements OnInit {
         // Create a new MatTableDataSource with the updated tableData
         this.dataSource = new MatTableDataSource(this.tableData);
       },
-      error => {
+      (error) => {
         // Handle any errors that may occur during the HTTP request
         console.error('Error fetching user data:', error);
       }
@@ -60,11 +66,12 @@ export class UserlistComponent implements OnInit {
 
   deleteBtn(id: number) {
     // Call the delete method of the ApiService with the URL and id
-    this.sweetalert.deleteBtn()
+    this.sweetalert.deleteBtn();
     this.http.delete(`http://localhost:8089/api/users/delete/${id}`).subscribe(
       (data) => {
         // Handle success
         console.log('User deleted successfully:', data);
+        this.getTableData();
         // Refresh user list or perform other operations as needed
       },
       (error) => {
@@ -74,7 +81,7 @@ export class UserlistComponent implements OnInit {
       }
     );
   }
- 
+
   public searchData(value: any): void {
     this.dataSource.filter = value.trim().toLowerCase();
     this.tableData = this.dataSource.filteredData;

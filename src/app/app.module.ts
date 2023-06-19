@@ -9,6 +9,8 @@ import { sharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { RetoursATraiteModule } from './core-component/return/retours-atraite/retours-atraite.module';
+import { RetoursTraitesModule } from './core-component/return/retours-traites/retours-traites.module';
 const icons = {
   Layers,
 };
@@ -22,6 +24,7 @@ const icons = {
     BrowserAnimationsModule,
     FormsModule,
     NgxDropzoneModule,
+    
   ],
   exports: [FeatherModule],
   bootstrap: [AppComponent],

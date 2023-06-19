@@ -280,7 +280,12 @@ export class routes {
   public static get editQuotation(): string {
     return this.quotation + '/edit-quotation';
   }
-
+  public static get retournontraitees(): string {
+    return  this.return +'/nontraitees';
+  }
+  public static get retourtraitees(): string {
+    return  this.return +'/traitees';
+  }
   public static get transferList(): string {
     return this.transfer + '/transfer-list';
   }

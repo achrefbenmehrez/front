@@ -5,7 +5,8 @@
   </div>
   <div class="page-btn">
     <a [routerLink]="routes.createSalesReturn" class="btn btn-added"
-      ><img src="assets/img/icons/plus.svg" alt="img" class="me-2" />Nouveau Retour</a
+      ><img src="assets/img/icons/plus.svg" alt="img" class="me-2" />Nouveau
+      Retour</a
     >
   </div>
 </div>
@@ -147,38 +148,26 @@
             <th mat-sort-header="ProductName">Réference</th>
             <th mat-sort-header="Date">Date Création</th>
             <th mat-sort-header="Customer">Envoyé</th>
-            <th mat-sort-header="Status" >Traité</th>
+            <th mat-sort-header="Status">Traité</th>
             <th mat-sort-header="GrandTotal">Recap</th>
             <th mat-sort-header="Paid">Avoir</th>
-            
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let return of tableData; let i = index">
+          <tr *ngFor="let return of retours; let i = index">
             <td>
               <label class="checkboxs">
                 <input type="checkbox" [(ngModel)]="return.isSelected" />
                 <span class="checkmarks"></span>
               </label>
             </td>
-            <td class="productimgname">
-              <a href="javascript:void(0);" class="product-img">
-                <img [src]="return.img" alt="product" />
-              </a>
-              <a href="javascript:void(0);">{{ return.ProductName }}</a>
-            </td>
-            <td>{{ return.Date }}</td>
+
+            <a href="javascript:void(0);">{{ return.id }}</a>
+
+            <td>{{ return.dateCreation }}</td>
             <td>{{ return.Customer }}</td>
             <td>
-              <span
-                [ngClass]="{
-                  'bg-lightgreen': return.Status === 'Received',
-                  'bg-lightred': return.Status === 'Pending',
-                  'bg-lightyellow': return.Status === 'Ordered'
-                }"
-                class="badges"
-                >{{ return.Status }}</span
-              >
+              {{ return.traitee }}
             </td>
             <td>{{ return.GrandTotal }}</td>
             <td>{{ return.Paid }}</td>
@@ -195,11 +184,8 @@
               >
             </td>
             <td>
-              <a class="me-3" [routerLink]="routes.editSalesReturns">
-                <img src="assets/img/icons/edit.svg" alt="img" />
-              </a>
               <a
-                (click)="deleteBtn()"
+                (click)="deleteBtn(return.id)"
                 class="me-3 confirm-text"
                 href="javascript:void(0);"
               >

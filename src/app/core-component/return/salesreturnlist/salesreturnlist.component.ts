@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,12 +28,14 @@ export class SalesreturnlistComponent implements OnInit {
   showFilter: boolean = false;
   dataSource!: MatTableDataSource<any>;
   public searchDataValue = '';
+  retours: any[] = [];
   //** / pagination variables
   constructor(
     private data: DataService,
     private pagination: PaginationService,
     private sweetalert: SweetalertService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.pagination.tablePageSize.subscribe((res: tablePageSize) => {
       if (this.router.url == this.routes.salesReturnList) {
@@ -41,13 +44,49 @@ export class SalesreturnlistComponent implements OnInit {
       }
     });
   }
-
-  deleteBtn() {
-    this.sweetalert.deleteBtn();
+  getRetoursByUser() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+      this.http
+        .get<any[]>('http://localhost:8089/api/Retours/user', { headers })
+        .subscribe(
+          (retours) => {
+            this.retours = retours;
+            console.log(this.retours);
+            // Handle successful response
+          },
+          (error) => {
+            // Handle error
+          }
+        );
+    }
   }
 
+
   date = new Date();
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getRetoursByUser();
+  }
+  deleteBtn(id: string) {
+    // Call the delete method of the ApiService with the URL and id
+    this.sweetalert.deleteBtn();
+    this.http
+      .delete(`http://localhost:8089/api/Retours/delete/${id}`)
+      .subscribe(
+        (data) => {
+          // Handle success
+          console.log('Return deleted successfully:', data);
+          this.router.navigateByUrl('/return/mesretours');
+          // Refresh user list or perform other operations as needed
+        },
+        (error) => {
+          // Handle error
+          console.error('Failed to delete user:', error);
+          // Display error message or perform other error handling as needed
+        }
+      );
+  }
   private getTableData(pageOption: pageSelection): void {
     this.data.getSalesReturnList().subscribe((apiRes: apiResultFormat) => {
       this.tableData = [];
