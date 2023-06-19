@@ -59,6 +59,7 @@ export class CreatesalesreturnComponent implements OnInit {
         })
         .subscribe((data) => {
           console.log(data);
+          this.router.navigate(['/return/mesretours']);
         });
     }
   }

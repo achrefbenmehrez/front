@@ -30,7 +30,7 @@ export class RetoursTraitesComponent {
   dataSource!: MatTableDataSource<any>;
   public searchDataValue = '';
   retours: any[] = [];
-  id="";
+  id = '';
   //** / pagination variables
   constructor(
     private data: DataService,
@@ -74,7 +74,7 @@ export class RetoursTraitesComponent {
         (data) => {
           // Handle success
           console.log('Return deleted successfully:', data);
-          this.router.navigateByUrl('/return/traitees');
+         
           // Refresh user list or perform other operations as needed
         },
         (error) => {
@@ -83,6 +83,7 @@ export class RetoursTraitesComponent {
           // Display error message or perform other error handling as needed
         }
       );
+     
   }
 
   date = new Date();
@@ -111,16 +112,19 @@ export class RetoursTraitesComponent {
       });
     });
   }
-  validerretour(id:string) {
+  validerretour(id: string) {
     const token = localStorage.getItem('token');
     if (token) {
       const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
       this.http
-        .put<any[]>(`http://localhost:8089/api/Retours/valider/${id}`,{}, { headers })
+        .put<any[]>(
+          `http://localhost:8089/api/Retours/valider/${id}`,
+          {},
+          { headers }
+        )
         .subscribe(
           (retou) => {
-            
-          this.router.navigateByUrl(routes.retourtraitees)
+            this.router.navigate(['/return/traitees']);
             // Handle successful response
           },
           (error) => {
@@ -129,19 +133,22 @@ export class RetoursTraitesComponent {
         );
     }
   }
-  valider(id:string){
+  valider(id: string) {
     this.validerretour(id);
   }
-  refuserretour(id:string) {
+  refuserretour(id: string) {
     const token = localStorage.getItem('token');
     if (token) {
       const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
       this.http
-        .put<any[]>(`http://localhost:8089/api/Retours/refuser/${id}`,{}, { headers })
+        .put<any[]>(
+          `http://localhost:8089/api/Retours/refuser/${id}`,
+          {},
+          { headers }
+        )
         .subscribe(
           (retou) => {
-            
-          this.router.navigateByUrl(routes.retourtraitees)
+            this.router.navigate(['/return/traitees']);
             // Handle successful response
           },
           (error) => {
@@ -150,7 +157,7 @@ export class RetoursTraitesComponent {
         );
     }
   }
-  refuser(id:string){
+  refuser(id: string) {
     this.refuserretour(id);
   }
   public searchData(value: any): void {
