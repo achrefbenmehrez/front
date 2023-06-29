@@ -1,1 +1,167 @@
-<p>return-details works!</p>
+<div class="page-header">
+    <div class="page-title">
+      <h4>Return Details</h4>
+      <h6>Full details of a return</h6>
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="slider-product-details">
+          <!-- <div class="owl-carousel owl-theme product-slide">
+             -->
+          <owl-carousel-o class="owl-theme product-slide" [options]="customOptions">
+            <ng-template carouselSlide>
+              <div class="slider-product">
+                <img [src]="this.product.imgLink" alt="img" />
+              </div>
+            </ng-template>
+            <ng-template carouselSlide>
+              <div carouselSlide class="slider-product">
+                <img [src]="this.product.imgLink" alt="img" />
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /add -->
+  <div class="col-lg-10 col-sm-12">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="bar-code-view">
+              <img [src]="this.user.profileImagePath" alt="barcode" />
+              <a class="printimg">
+                <img [src]="this.usertrait.profileImagePath" alt="print" />
+              </a>
+            </div>
+            <div class="productdetails">
+              <ul class="product-bar">
+              <li>
+                <h4>User</h4>
+                <h6>{{this.user.email}}</h6>
+              </li>
+              <li>
+                <h4>Date</h4>
+                <h6>{{this.dateCreation}}</h6>
+              </li>
+              <li>
+                <h4>NumBL</h4>
+                <h6>{{this.numBL}}</h6>
+              </li>
+              <li>
+                <h4>Num Facture</h4>
+                <h6>{{this.numFactur}}</h6>
+              </li>
+              <li>
+                <h4>Motif de retour</h4>
+                <h6>{{this.motifRetour}}</h6>
+              </li>
+              <li>
+                <h4>Quantite</h4>
+                <h6>{{this.quantite}}</h6>
+              </li>
+              <li>
+                <h4>Commentaire</h4>
+                <h6>{{this.commentaire}}</h6>
+              </li>
+              <li>
+                <h4>Traitée</h4>
+                <h6>{{this.traitee}}</h6>
+              </li>
+              <li>
+                <h4>Traitée par</h4>
+                <h6>{{this.usertrait.email}}</h6>
+              </li>
+              <li>
+                <h4>Date Traitement</h4>
+                <h6>{{this.dateTraitement}}</h6>
+              </li>
+              <!-- <li>
+                <h4>Montant Apres Remise</h4>
+                <h6>{{montantApresRemise}}</h6>
+              </li>
+              <li>
+                <h4>Disponible</h4>
+                <h6>{{disponible}}</h6>
+              </li>
+   -->
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="bar-code-view">
+              <img [src]="this.product.imgLink" alt="barcode" />
+              <a class="printimg">
+                <img [src]="this.product.imgLink" alt="print" />
+              </a>
+            </div>
+            <div class="productdetails">
+              <ul class="product-bar">
+                  <li>
+                    <h4>Product name</h4>
+                    <h6>{{this.product.productName}}</h6>
+                  </li>
+                  <li>
+                    <h4>CodePCT</h4>
+                    <h6>{{this.product.codePCT}}</h6>
+                  </li>
+                  <li>
+                    <h4>Code Teriak</h4>
+                    <h6>{{this.product.codeTeriak}}</h6>
+                  </li>
+                  <li>
+                    <h4>Unite par caisse</h4>
+                    <h6>{{this.product.uniteParCaisse}}</h6>
+                  </li>
+                  <li>
+                    <h4>Price</h4>
+                    <h6>{{this.product.prix}}</h6>
+                  </li>
+                  <li>
+                    <h4>Avec vrac</h4>
+                    <h6>{{this.product.avecvrac}}</h6>
+                  </li>
+                  <li>
+                    <h4>Remise</h4>
+                    <h6>{{this.product.remise}}</h6>
+                  </li>
+                  <li>
+                    <h4>Carton</h4>
+                    <h6>{{this.product.carton}}</h6>
+                  </li>
+                  <li>
+                    <h4>vrac</h4>
+                    <h6>{{this.product.vrac}}</h6>
+                  </li>
+                  <li>
+                    <h4>Quantite Totale</h4>
+                    <h6>{{this.product.quantiteTotale}}</h6>
+                  </li>
+                  <!-- <li>
+                    <h4>Montant Apres Remise</h4>
+                    <h6>{{montantApresRemise}}</h6>
+                  </li>
+                  <li>
+                    <h4>Disponible</h4>
+                    <h6>{{disponible}}</h6>
+                  </li>
+       -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  
+  <!-- /add -->
+  
