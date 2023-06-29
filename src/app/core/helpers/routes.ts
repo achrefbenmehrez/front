@@ -281,10 +281,10 @@ export class routes {
     return this.quotation + '/edit-quotation';
   }
   public static get retournontraitees(): string {
-    return  this.return +'/nontraitees';
+    return this.return + '/nontraitees';
   }
   public static get retourtraitees(): string {
-    return  this.return +'/traitees';
+    return this.return + '/traitees';
   }
   public static get transferList(): string {
     return this.transfer + '/transfer-list';
@@ -301,6 +301,9 @@ export class routes {
 
   public static get salesReturnList(): string {
     return this.return + '/mesretours';
+  }
+  public static ReturnDetails(id:string): string {
+    return this.return + '/details/'+ id;
   }
   public static get livraison(): string {
     return this.purchase + '/livraison';

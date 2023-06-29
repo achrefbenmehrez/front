@@ -189,7 +189,10 @@
                 >{{ return.PaymentStatus }}</span
               >
             </td>
-
+            <td>
+            <a class="me-3" [routerLink]="routes.ReturnDetails(return.id)">
+              <img src="assets/img/icons/eye.svg" alt="img" />
+            </a>
             <a
               (click)="deleteBtn(return.id)"
               class="me-3 confirm-text"
@@ -197,6 +200,7 @@
             >
               <img src="assets/img/icons/delete.svg" alt="img" />
             </a>
+          </td>
           </tr>
           <tr *ngIf="tableData.length === 0">
             <td colspan="12">

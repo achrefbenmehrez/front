@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Sort } from '@angular/material/sort';
@@ -38,7 +38,7 @@ export class RetoursTraitesComponent {
     private sweetalert: SweetalertService,
     private router: Router,
     private http: HttpClient,
-    private location: Location
+   
   ) {
     this.pagination.tablePageSize.subscribe((res: tablePageSize) => {
       if (this.router.url == this.routes.salesReturnList) {

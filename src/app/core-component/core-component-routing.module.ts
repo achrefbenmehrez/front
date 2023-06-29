@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/core.index';
 import { CoreComponentComponent } from './core-component.component';
+import { ReturnDetailsComponent } from './return/return-details/return-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -88,7 +89,7 @@ const routes: Routes = [
           import('./annonce/annonce.module').then(
             (m) => m.AnnonceModule
           ),
-      }
+      },
     ],
   }
 ];

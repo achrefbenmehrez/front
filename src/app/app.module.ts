@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { RetoursATraiteModule } from './core-component/return/retours-atraite/retours-atraite.module';
 import { RetoursTraitesModule } from './core-component/return/retours-traites/retours-traites.module';
+
 const icons = {
   Layers,
 };
