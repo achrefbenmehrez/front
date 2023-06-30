@@ -1,102 +1,3 @@
-<div class="row">
-  <div class="col-lg-3 col-sm-6 col-12">
-    <div class="dash-widget">
-      <div class="dash-widgetimg">
-        <span><img src="assets/img/icons/dash1.svg" alt="img" /></span>
-      </div>
-      <div class="dash-widgetcontent">
-        <h5>
-          $<span class="counters counter-value" [CountTo]="307144.0" [from]="0" [duration]="1">
-          </span>
-        </h5>
-        <h6>Total Purchase Due</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-sm-6 col-12">
-    <div class="dash-widget dash1">
-      <div class="dash-widgetimg">
-        <span><img src="assets/img/icons/dash2.svg" alt="img" /></span>
-      </div>
-      <div class="dash-widgetcontent">
-        <h5>
-          $<span class="counters" [CountTo]="4385.0" [from]="0" [duration]="1"></span>
-        </h5>
-        <h6>Total Sales Due</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-sm-6 col-12">
-    <div class="dash-widget dash2">
-      <div class="dash-widgetimg">
-        <span><img src="assets/img/icons/dash3.svg" alt="img" /></span>
-      </div>
-      <div class="dash-widgetcontent">
-        <h5>
-          $<span class="counters" [CountTo]="385656.5" [from]="0" [duration]="1"></span>
-        </h5>
-        <h6>Total Sale Amount</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-sm-6 col-12">
-    <div class="dash-widget dash3">
-      <div class="dash-widgetimg">
-        <span><img src="assets/img/icons/dash4.svg" alt="img" /></span>
-      </div>
-      <div class="dash-widgetcontent">
-        <h5>
-          $<span class="counters" [CountTo]="40000.0" [from]="0" [duration]="1"></span>
-        </h5>
-        <h6>Total Sale Amount</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-sm-6 col-12 d-flex">
-    <div class="dash-count">
-      <div class="dash-counts">
-        <h4>100</h4>
-        <h5>Customers</h5>
-      </div>
-      <div class="dash-imgs">
-        <i-feather name="user"></i-feather>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-sm-6 col-12 d-flex">
-    <div class="dash-count das1">
-      <div class="dash-counts">
-        <h4>100</h4>
-        <h5>Suppliers</h5>
-      </div>
-      <div class="dash-imgs">
-        <i-feather name="user-check"></i-feather>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-sm-6 col-12 d-flex">
-    <div class="dash-count das2">
-      <div class="dash-counts">
-        <h4>100</h4>
-        <h5>Purchase Invoice</h5>
-      </div>
-      <div class="dash-imgs">
-        <i-feather name="file-text"></i-feather>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-sm-6 col-12 d-flex">
-    <div class="dash-count das3">
-      <div class="dash-counts">
-        <h4>105</h4>
-        <h5>Sales Invoice</h5>
-      </div>
-      <div class="dash-imgs">
-        <i-feather name="file"></i-feather>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Button trigger modal -->
 
 <div class="row">
@@ -119,42 +20,65 @@
   </div>
 </div>
 
-<div class="card mb-0">
-  <div class="card-body">
-    <h4 class="card-title">Expired Products</h4>
-    <div class="table-responsive dataview">
-      <table (matSortChange)="sortExpiredProducts($event)" matSort matSortActive="Sno" matSortDirection="asc"
-        matSortDisableClear class="table">
-        <thead>
-          <tr>
-            <th mat-sort-header="Sno">SNo</th>
-            <th mat-sort-header="ProductCode">Product Code</th>
-            <th mat-sort-header="ProductName">Product Name</th>
-            <th mat-sort-header="BrandName">Brand Name</th>
-            <th mat-sort-header="CategoryName">Category Name</th>
-            <th mat-sort-header="ExpiryDate">Expiry Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let dashboard2 of expiredProducts">
-            <td>{{ dashboard2.SNo }}</td>
-            <td>
-              <a href="javascript:void(0);">{{ dashboard2.ProductCode }}</a>
-            </td>
-            <td class="productimgname">
-              <a class="product-img" [routerLink]="routes.productList">
-                <img [src]="dashboard2.img" alt="product" />
-              </a>
-              <a [routerLink]="routes.productList">{{
-                dashboard2.ProductName
-              }}</a>
-            </td>
-            <td>{{ dashboard2.BrandName }}</td>
-            <td>{{ dashboard2.CategoryName }}</td>
-            <td>{{ dashboard2.ExpiryDate }}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Nombre de Commandes</h5>
+      </div>
+      <div class="card-body">
+        <div id="s-bar" class="chart-set">
+          <apx-chart [series]="BarCharts.series" [chart]="BarCharts.chart" [dataLabels]="BarCharts.dataLabels"
+            [plotOptions]="BarCharts.plotOptions" [xaxis]="BarCharts.xaxis"></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Nombre de réclamations</h5>
+      </div>
+      <div class="card-body">
+        <div id="chart">
+          <apx-chart [series]="Areachart.series" [chart]="Areachart.chart" [xaxis]="Areachart.xaxis"
+            [stroke]="Areachart.stroke" [dataLabels]="Areachart.dataLabels" [yaxis]="Areachart.yaxis"
+            [labels]="Areachart.labels" [legend]="Areachart.legend"></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Nombre de retours</h5>
+      </div>
+      <div class="card-body">
+        <div id="chart">
+          <apx-chart [series]="PieChart.series" [chart]="PieChart.chart" [labels]="PieChart.labels"
+            [responsive]="PieChart.responsive"></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Top Produits</h5>
+      </div>
+      <div class="card-body">
+        <div id="chart">
+          <apx-chart [series]="DistributedChart.series" [chart]="DistributedChart.chart"
+            [dataLabels]="DistributedChart.dataLabels" [plotOptions]="DistributedChart.plotOptions"
+            [yaxis]="DistributedChart.yaxis" [xaxis]="DistributedChart.xaxis" [legend]="DistributedChart.legend"
+            [colors]="DistributedChart.colors" [grid]="DistributedChart.grid"></apx-chart>
+        </div>
+      </div>
     </div>
   </div>
 </div>
