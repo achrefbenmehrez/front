@@ -1,0 +1,93 @@
+
+<div class="page-header">
+    <div class="page-title">
+        <h4>Modifier Retour </h4>
+        <h6>Add/Update Sales Return</h6>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+           
+               
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>Code Client</label>
+                    <input type="text" [(ngModel)]="this.user.codeClient"readonly>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>Nom Client</label>
+                    <input type="text" [(ngModel)]="this.user.email"readonly>
+                </div>
+            </div>
+           
+            
+            <div class="col-lg-12 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>Product</label>
+                    <input type="text" value="{{this.product.codePCT}},{{this.product.productName}},{{this.product.codeTeriak}},Disponible :{{this.product.disponible}}"readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-3 col-sm-6 col-12">
+            <div class="form-group">
+                <label>No.Lot</label>
+                <select class="form-select"></select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12">
+            <div class="form-group">
+                <label>No.BL</label>
+                <select class="form-select"></select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12">
+            <div class="form-group">
+                <label>No.Facture</label>
+                <select class="form-select"></select>
+            </div>
+        </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>Quantité</label>
+                    <input type="text" placeholder="0" [(ngModel)]="this.quantite">
+                </div>
+            </div>
+           
+           
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>motif de Retour</label>
+                    <select class="form-select"[(ngModel)]="this.motifRetour">
+                        <option value="SansVingnitte">sans vignette</option>
+                <option value="SansPippette">sans pipette</option>
+                <option value="Perimé">Périmé</option>
+                <option value="LivraisonManquante">Livraision Manquante</option>
+                <option value="EmballageAbimé">Emballage Abimé</option>
+                <option value="Dateprocheinf3mois">
+                  Date Proche inferieur a 3 mois
+                </option>
+                <option value="Autre">Autre</option>
+              </select>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" [(ngModel)]="this.commentaire"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <a class="btn btn-submit me-2" (click)="opsubmit()">Valider</a>
+                <a routerLink="/return/nontraitees" class="btn btn-cancel">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

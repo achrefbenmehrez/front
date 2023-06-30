@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class CreatesalesreturnComponent implements OnInit {
   public routes = routes;
-  public tableData = [{}];
+  public tableData :any[]=[] ;
 
   id = '';
   user: any;
@@ -34,7 +34,22 @@ export class CreatesalesreturnComponent implements OnInit {
   
   product: any;
   constructor(private http: HttpClient,private router:Router) {}
+addline()
+{
+  const newLine = {
+    motif: this.motifRetour,
+    commentaire: this.commentaire,
+    article: this.product,
+    quantite: this.quantite
+    // Add other properties as needed
+  };
+  this.tableData.push(newLine);
+  this.motifRetour = '';
+  this.commentaire = '';
+  this.product = null;
+  this.quantite = 0;
 
+}
   date = new Date();
   ngOnInit(): void {
     this.getCommandesByClient();
@@ -43,26 +58,31 @@ export class CreatesalesreturnComponent implements OnInit {
     this.tableData.splice(index, 1);
   }
   async opsubmit() {
-   await this.createRetour(this.motifRetour, this.commentaire, this.product,this.quantite);
+   await this.createRetour();
     this.router.navigateByUrl("/return/mesretours")
   }
-  createRetour(motifRetour: string, commentaire: string, product: any,quantite:number) {
-    console.log(this.product);
-    const body = { motifRetour, commentaire, product,quantite };
-
+  createRetour() {
     const token = localStorage.getItem('token');
     if (token) {
       const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-      this.http
-        .post<any>('http://localhost:8089/api/Retours/create', body, {
-          headers,
-        })
-        .subscribe((data) => {
-          console.log(data);
-          this.router.navigate(['/return/mesretours']);
-        });
+      for (const retour of this.tableData) {
+        const body = {
+          motifRetour: retour.motif,
+          commentaire: retour.commentaire,
+          product: retour.article,
+          quantite: retour.quantite
+        };
+  
+        this.http.post<any>('http://localhost:8089/api/Retours/create', body, { headers })
+          .subscribe((data) => {
+            console.log(data);
+            // You can perform additional actions here, such as updating the UI or displaying a success message
+          });
+      }
+      this.router.navigate(['/return/mesretours']);
     }
   }
+  
   getCommandesByClient() {
     const token = localStorage.getItem('token');
     if (token) {

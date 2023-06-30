@@ -59,7 +59,7 @@ export class ReturnDetailsComponent implements OnInit{
         this.commentaire = data.commentaire;
         this.numFactur=data.numFactur;
         this.usertrait=data.usertrait;
-        console.log(this.usertrait)
+        console.log(this.motifRetour)
       },
 
       (error) => {

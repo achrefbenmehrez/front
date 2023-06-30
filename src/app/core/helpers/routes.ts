@@ -199,6 +199,9 @@ export class routes {
   public static get editSalesReturns(): string {
     return this.sales + '/edit-sales-returns';
   }
+  public static editreturn(id: string): string {
+    return this.return + '/edit/' + id;
+  }
   public static get editSales(): string {
     return this.sales + '/edit-sales';
   }
@@ -302,8 +305,8 @@ export class routes {
   public static get salesReturnList(): string {
     return this.return + '/mesretours';
   }
-  public static ReturnDetails(id:string): string {
-    return this.return + '/details/'+ id;
+  public static ReturnDetails(id: string): string {
+    return this.return + '/details/' + id;
   }
   public static get livraison(): string {
     return this.purchase + '/livraison';

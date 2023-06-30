@@ -184,6 +184,9 @@
               >
             </td>
             <td>
+              <a class="me-3" [routerLink]="routes.ReturnDetails(return.id)">
+                <img src="assets/img/icons/eye.svg" alt="img" />
+              </a>
               <a
                 (click)="deleteBtn(return.id)"
                 class="me-3 confirm-text"

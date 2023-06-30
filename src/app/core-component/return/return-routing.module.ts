@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReturnComponent } from './return.component';
 import { ReturnDetailsComponent } from './return-details/return-details.component';
+import { EditreturnComponent } from './editreturn/editreturn.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'salesreturnlist', pathMatch: 'full' },
@@ -67,6 +68,9 @@ const routes: Routes = [
       {path: 'details/:id',
         component:ReturnDetailsComponent
       },
+      {path: 'edit/:id',
+      component:EditreturnComponent
+    },
     ],
   },
 ];
