@@ -1,33 +1,24 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Sort } from '@angular/material/sort';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexPlotOptions,
-  ApexYAxis,
-  ApexXAxis,
-  ApexResponsive,
-  ApexLegend,
-  ApexFill,
-} from 'ng-apexcharts';
+import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexGrid, ApexLegend, ApexPlotOptions, ApexResponsive, ApexStroke, ApexTitleSubtitle, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
 import { CommonService } from 'src/app/core/core.index';
+import { routes } from 'src/app/core/helpers/routes';
+import { series } from "./data";
 
 export type ChartOptions = {
-  series: ApexAxisChartSeries | any;
-  chart: ApexChart | any;
-  responsive: ApexResponsive | any;
-  colors: any;
-  dataLabels: ApexDataLabels | any;
-  plotOptions: ApexPlotOptions | any;
-  yaxis: ApexYAxis | any;
-  xaxis: ApexXAxis | any;
-  legend: ApexLegend | any;
-  fill: ApexFill | any;
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  dataLabels: ApexDataLabels;
+  grid: ApexGrid;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
+  labels: any;
+  legend: ApexLegend;
+  subtitle: ApexTitleSubtitle;
+  yaxis: ApexYAxis;
+  responsive: ApexResponsive[];
 };
-import { routes } from 'src/app/core/helpers/routes';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,203 +28,374 @@ import { routes } from 'src/app/core/helpers/routes';
 export class DashboardComponent implements OnInit {
   public routes = routes;
   public annonces: any[] = [];
+  commandesPerYear: { [year: number]: number } = {};
+  reclamationsPerYear: { [year: number]: number } = {};
+  retoursPerYear: { [year: number]: number } = {};
+  topProducts: { [name: string]: number } = {};
+  @ViewChild("chart")
+  chart!: ChartComponent;
+  public Linechart: Partial<ChartOptions> | any;
+  public Areachart: Partial<ChartOptions> | any;
+  public ColumnCharts: Partial<ChartOptions> | any;
+  public StackedCharts: Partial<ChartOptions> | any;
+  public BarCharts: Partial<ChartOptions> | any;
+  public MixedChart: Partial<ChartOptions> | any;
+  public DonutChart: Partial<ChartOptions> | any;
+  public RadialChart: Partial<ChartOptions> | any;
+  public PieChart: Partial<ChartOptions> | any;
+  public DistributedChart: Partial<ChartOptions> | any;
 
   private getTableData(): void {
     this.http.get('http://localhost:8089/api/annonces').subscribe(
       (data: any) => {
-        // Update the tableData property with the retrieved data
         this.annonces = data;
       },
       error => {
-        // Handle any errors that may occur during the HTTP request
         console.error('Error fetching annonce data:', error);
       }
     );
   }
 
-  @ViewChild('chart') chart!: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
-  public currency!: string;
-  public recentlyAddedProducts = [
-    {
-      Sno: '1',
-      img: 'assets/img/product/product22.jpg',
-      Products: 'Apple Earpods',
-      Price: 899,
-    },
-    {
-      Sno: '2',
-      img: 'assets/img/product/product23.jpg',
-      Products: 'iPhone 11',
-      Price: 668.51,
-    },
-    {
-      Sno: '3',
-      img: 'assets/img/product/product24.jpg',
-      Products: 'samsung',
-      Price: 5,
-    },
-    {
-      Sno: '4',
-      img: 'assets/img/product/product6.jpg',
-      Products: 'Macbook Pro',
-      Price: 29.01,
-    },
-  ];
-
-  public expiredProducts = [
-    {
-      SNo: '1',
-      ProductCode: 'IT0001',
-      ProductName: 'Orange',
-      img: 'assets/img/product/product2.jpg',
-      BrandName: 'N/D',
-      CategoryName: 'Fruits',
-      ExpiryDate: '12-12-2022',
-    },
-    {
-      SNo: '2',
-      ProductCode: 'IT0002',
-      ProductName: 'Pineapple',
-      img: 'assets/img/product/product3.jpg',
-      BrandName: 'N/D',
-      CategoryName: 'Fruits',
-      ExpiryDate: '25-11-2022',
-    },
-    {
-      SNo: '3',
-      ProductCode: 'IT0003',
-      ProductName: 'Stawberry',
-      img: 'assets/img/product/product4.jpg',
-      BrandName: 'N/D',
-      CategoryName: 'Fruits',
-      ExpiryDate: '19-11-2022',
-    },
-    {
-      SNo: '4',
-      ProductCode: 'IT0004',
-      ProductName: 'Avocat',
-      img: 'assets/img/product/product5.jpg',
-      BrandName: 'N/D',
-      CategoryName: 'Fruits',
-      ExpiryDate: '20-11-2022',
-    },
-  ];
-
-  constructor(private http: HttpClient, private common: CommonService) {
-    this.chartOptions = {
-      series: [
-        {
-          name: 'Sales',
-          color: '#EA5455',
-          data: [50, 45, 60, 70, 50, 45, 60, 70],
-        },
-        {
-          name: 'Purchase',
-          color: '#28C76F',
-          data: [-21, -54, -45, -35, -21, -54, -45, -35],
-        },
-      ],
-      chart: {
-        type: 'bar',
-        height: 300,
-        stacked: true,
-        zoom: {
-          enabled: true,
-        },
-      },
-
-      responsive: {
-        breakpoint: 280,
-        options: {
-          legend: {
-            position: 'bottom',
-            offsetY: 0,
-          },
-        },
-      },
-      plotOptions: {
-        area: {
-          fillTo: 'end',
-        },
-        bar: {
-          horizontal: false,
-          columnWidth: '20%',
-          borderRadius: 7,
-          borderRadiusApplication: 'end',
-          borderRadiusWhenStacked: 'all',
-          distributed: true,
-          colors: {
-            ranges: [
-              {
-                from: 0,
-                to: 100000,
-                color: '#28C76F',
-              },
-              {
-                from: -100000,
-                to: 0,
-                color: '#EA5455',
-              },
-            ],
-          },
-        },
-      },
-      xaxis: {
-        categories: [
-          ' Jan ',
-          'feb',
-          'march',
-          'april',
-          'may',
-          'june',
-          'july',
-          'auguest',
-        ],
-      },
-
-      legend: {
-        position: 'right',
-        offsetY: 40,
-      },
-      fill: {
-        opacity: 1,
-      },
-    };
-
-    this.common.currency$.subscribe((res: string) => {
-      this.currency = res;
-    });
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
     this.getTableData();
+    this.fetchCommandesPerYear();
+    this.fetchReclamationsPerYear();
+    this.fetchRetoursPerYear();
+    this.fetchTopProducts();
   }
 
-  public sortRecentlyAddedProducts(sort: Sort) {
-    const data = this.recentlyAddedProducts.slice();
+  fetchCommandesPerYear() {
+    const token = localStorage.getItem('token');
+    const authHeader = 'Bearer ' + token;
 
-    if (!sort.active || sort.direction === '') {
-      this.recentlyAddedProducts = data;
-    } else {
-      this.recentlyAddedProducts = data.sort((a: any, b: any) => {
-        const aValue = a[sort.active];
-        const bValue = b[sort.active];
-        return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
+    this.http.get<{ [year: number]: number }>('http://localhost:8089/api/commandes/per-year', { headers: { Authorization: authHeader } })
+      .subscribe(data => {
+        this.commandesPerYear = data;
+        this.updateBarChart();
       });
-    }
+
+    this.BarCharts = {
+      series: [
+        {
+          name: "basic",
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: [
+          "South Korea",
+          "Canada",
+          "United Kingdom",
+          "Netherlands",
+          "Italy",
+          "France",
+          "Japan",
+          "United States",
+          "China",
+          "Germany"
+        ]
+      }
+    };
   }
-  public sortExpiredProducts(sort: Sort) {
-    const data = this.expiredProducts.slice();
 
-    if (!sort.active || sort.direction === '') {
-      this.expiredProducts = data;
-    } else {
-      this.expiredProducts = data.sort((a: any, b: any) => {
-        const aValue = a[sort.active];
-        const bValue = b[sort.active];
-        return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
+  fetchReclamationsPerYear() {
+    const token = localStorage.getItem('token');
+    const authHeader = 'Bearer ' + token;
+
+    this.http.get<{ [year: number]: number }>('http://localhost:8089/api/reclamations/per-year', { headers: { Authorization: authHeader } })
+      .subscribe(data => {
+        this.reclamationsPerYear = data;
+        this.updateAreaChart();
       });
-    }
+
+    this.Areachart = {
+      series: [
+        {
+          name: "STOCK ABC",
+          data: series.monthDataSeries1.prices
+        }
+      ],
+      chart: {
+        type: "area",
+        height: 350,
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "straight"
+      },
+      labels: series.monthDataSeries1.dates,
+      xaxis: {
+        type: "datetime"
+      },
+      yaxis: {
+        opposite: true
+      },
+      legend: {
+        horizontalAlign: "left"
+      }
+    };
+  }
+
+  fetchRetoursPerYear() {
+    const token = localStorage.getItem('token');
+    const authHeader = 'Bearer ' + token;
+
+    this.http.get<{ [year: number]: number }>('http://localhost:8089/api/Retours/per-year', { headers: { Authorization: authHeader } })
+      .subscribe(data => {
+        this.retoursPerYear = data;
+        this.updatePieChart();
+      });
+
+    this.PieChart = {
+      series: [44, 55, 13, 43, 22],
+      chart: {
+        width: 380,
+        type: "pie"
+      },
+      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  }
+
+  fetchTopProducts() {
+    const token = localStorage.getItem('token');
+    const authHeader = 'Bearer ' + token;
+
+    this.http.get<{ [year: number]: number }>('http://localhost:8089/api/products/top4', { headers: { Authorization: authHeader } })
+      .subscribe(data => {
+        this.topProducts = data;
+        this.updateDistributedChart();
+      });
+
+    this.DistributedChart = {
+      series: [
+        {
+          name: "distibuted",
+          data: [21, 22, 10, 28, 16, 21, 13, 30]
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "bar"
+      },
+      colors: [
+        "#008FFB",
+        "#00E396",
+        "#FEB019",
+        "#FF4560",
+        "#775DD0",
+        "#546E7A",
+        "#26a69a",
+        "#D10CE8"
+      ],
+      plotOptions: {
+        bar: {
+          columnWidth: "45%",
+          distributed: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      legend: {
+        show: false
+      },
+      grid: {
+        show: false
+      },
+      xaxis: {
+        categories: [
+          ["John", "Doe"],
+          ["Joe", "Smith"],
+          ["Jake", "Williams"],
+          "Amber",
+          ["Peter", "Brown"],
+          ["Mary", "Evans"],
+          ["David", "Wilson"],
+          ["Lily", "Roberts"]
+        ],
+        labels: {
+          style: {
+            colors: [
+              "#008FFB",
+              "#00E396",
+              "#FEB019",
+              "#FF4560",
+              "#775DD0",
+              "#546E7A",
+              "#26a69a",
+              "#D10CE8"
+            ],
+            fontSize: "12px"
+          }
+        }
+      }
+    };
+  }
+
+  updateBarChart() {
+    this.BarCharts = {
+      series: [
+        {
+          name: "Commandes",
+          data: Object.values(this.commandesPerYear)
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: Object.keys(this.commandesPerYear)
+      }
+    };
+  }
+
+  updateAreaChart() {
+    this.Areachart = {
+      series: [
+        {
+          name: "Reclamations",
+          data: Object.values(this.reclamationsPerYear)
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: Object.keys(this.reclamationsPerYear)
+      }
+    };
+  }
+
+  updatePieChart() {
+    this.PieChart = {
+      series: Object.values(this.retoursPerYear),
+      chart: {
+        width: 380,
+        type: "pie"
+      },
+      labels: Object.keys(this.retoursPerYear),
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  }
+
+  updateDistributedChart() {
+    this.DistributedChart = {
+      series: [
+        {
+          name: "Nombre de commandes",
+          data: Object.values(this.topProducts)
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "bar"
+      },
+      colors: [
+        "#008FFB",
+        "#00E396",
+        "#FEB019",
+        "#FF4560",
+        "#775DD0",
+        "#546E7A",
+        "#26a69a",
+        "#D10CE8"
+      ],
+      plotOptions: {
+        bar: {
+          columnWidth: "45%",
+          distributed: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      legend: {
+        show: false
+      },
+      grid: {
+        show: false
+      },
+      xaxis: {
+        categories: Object.keys(this.topProducts),
+        labels: {
+          style: {
+            colors: [
+              "#008FFB",
+              "#00E396",
+              "#FEB019",
+              "#FF4560",
+              "#775DD0",
+              "#546E7A",
+              "#26a69a",
+              "#D10CE8"
+            ],
+            fontSize: "12px"
+          }
+        }
+      }
+    };
   }
 }
