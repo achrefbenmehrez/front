@@ -3,18 +3,18 @@
 ## Tech Stack
 achrefbenmehrez/front is built on the following main stack:
 
-- [Rollbar](https://rollbar.com/) – Exception Monitoring
-- [Jasmine](http://jasmine.github.io/) – Javascript Testing Framework
-- [Bootstrap](http://getbootstrap.com/) – Front-End Frameworks
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
-- [Karma](http://karma-runner.github.io/) – Browser Testing
 - [TypeScript](http://www.typescriptlang.org) – Languages
-- [RxJS](http://reactivex.io/rxjs/) – Concurrency Frameworks
-- [Font Awesome](https://fontawesome.com/) – Fonts
 - [Angular](https://angular.io) – Javascript MVC Frameworks
-- [Chart.js](http://www.chartjs.org/) – Charting Libraries
-- [SweetAlert](https://sweetalert.js.org/) – Javascript Utilities & Libraries
 - [ApexCharts](https://apexcharts.com/) – Charting Libraries
+- [Bootstrap](http://getbootstrap.com/) – Front-End Frameworks
+- [Chart.js](http://www.chartjs.org/) – Charting Libraries
+- [RxJS](http://reactivex.io/rxjs/) – Concurrency Frameworks
+- [Jasmine](http://jasmine.github.io/) – Javascript Testing Framework
+- [Karma](http://karma-runner.github.io/) – Browser Testing
+- [Rollbar](https://rollbar.com/) – Exception Monitoring
+- [Font Awesome](https://fontawesome.com/) – Fonts
+- [SweetAlert](https://sweetalert.js.org/) – Javascript Utilities & Libraries
 
 Full tech stack [here](/techstack.md)
 
@@ -24,18 +24,18 @@ Full tech stack [here](/techstack.md)
 ## Tech Stack
 achrefbenmehrez/front is built on the following main stack:
 
-- <img width='25' height='25' src='https://img.stackshare.io/service/328/default_3147629185038a15dd41907749544023633da1ea.png' alt='Rollbar'/> [Rollbar](https://rollbar.com/) – Exception Monitoring
-- <img width='25' height='25' src='https://img.stackshare.io/service/831/7c0b595409af531b9cdeb07f8c513e8b.png' alt='Jasmine'/> [Jasmine](http://jasmine.github.io/) – Javascript Testing Framework
-- <img width='25' height='25' src='https://img.stackshare.io/service/1101/C9QJ7V3X.png' alt='Bootstrap'/> [Bootstrap](http://getbootstrap.com/) – Front-End Frameworks
 - <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1420/TidYGd6a.png' alt='Karma'/> [Karma](http://karma-runner.github.io/) – Browser Testing
 - <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1796/984368.png' alt='RxJS'/> [RxJS](http://reactivex.io/rxjs/) – Concurrency Frameworks
-- <img width='25' height='25' src='https://img.stackshare.io/service/3244/1_Mr1Fy00XjPGNf1Kkp_hWtw_2x.png' alt='Font Awesome'/> [Font Awesome](https://fontawesome.com/) – Fonts
 - <img width='25' height='25' src='https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg' alt='Angular'/> [Angular](https://angular.io) – Javascript MVC Frameworks
-- <img width='25' height='25' src='https://img.stackshare.io/service/3866/_GD1-XrU_400x400.jpg' alt='Chart.js'/> [Chart.js](http://www.chartjs.org/) – Charting Libraries
-- <img width='25' height='25' src='https://ucarecdn.com/c4c55828-7bcf-4661-8f4f-52745636aafd/' alt='SweetAlert'/> [SweetAlert](https://sweetalert.js.org/) – Javascript Utilities & Libraries
 - <img width='25' height='25' src='https://img.stackshare.io/service/10369/fYzCQZ9X_400x400.jpg' alt='ApexCharts'/> [ApexCharts](https://apexcharts.com/) – Charting Libraries
+- <img width='25' height='25' src='https://img.stackshare.io/service/1101/C9QJ7V3X.png' alt='Bootstrap'/> [Bootstrap](http://getbootstrap.com/) – Front-End Frameworks
+- <img width='25' height='25' src='https://img.stackshare.io/service/3866/_GD1-XrU_400x400.jpg' alt='Chart.js'/> [Chart.js](http://www.chartjs.org/) – Charting Libraries
+- <img width='25' height='25' src='https://img.stackshare.io/service/1796/984368.png' alt='RxJS'/> [RxJS](http://reactivex.io/rxjs/) – Concurrency Frameworks
+- <img width='25' height='25' src='https://img.stackshare.io/service/831/7c0b595409af531b9cdeb07f8c513e8b.png' alt='Jasmine'/> [Jasmine](http://jasmine.github.io/) – Javascript Testing Framework
+- <img width='25' height='25' src='https://img.stackshare.io/service/1420/TidYGd6a.png' alt='Karma'/> [Karma](http://karma-runner.github.io/) – Browser Testing
+- <img width='25' height='25' src='https://img.stackshare.io/service/328/default_3147629185038a15dd41907749544023633da1ea.png' alt='Rollbar'/> [Rollbar](https://rollbar.com/) – Exception Monitoring
+- <img width='25' height='25' src='https://img.stackshare.io/service/3244/1_Mr1Fy00XjPGNf1Kkp_hWtw_2x.png' alt='Font Awesome'/> [Font Awesome](https://fontawesome.com/) – Fonts
+- <img width='25' height='25' src='https://ucarecdn.com/c4c55828-7bcf-4661-8f4f-52745636aafd/' alt='SweetAlert'/> [SweetAlert](https://sweetalert.js.org/) – Javascript Utilities & Libraries
 
 Full tech stack [here](/techstack.md)
 
@@ -46,7 +46,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [achrefbenmehrez/front](https://github.com/achrefbenmehrez/front)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|39<br/>Tools used|01/14/24 <br/>Report generated|
+|39<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
